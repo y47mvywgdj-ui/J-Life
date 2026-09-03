@@ -17,11 +17,11 @@
     .section-title{display:flex;align-items:center;justify-content:space-between;margin:18px 2px 10px}.section-title h2{font-size:17px;margin:0}.linkbtn{border:0;background:transparent;color:#334155;font-weight:700}
     .quick{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.q{border:0;background:var(--card);border-radius:18px;padding:14px 6px;box-shadow:0 5px 18px rgba(15,23,42,.05);font-weight:700}.q span{display:block;font-size:22px;margin-bottom:6px}
     .row{display:flex;align-items:flex-start;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}.row:last-child{border-bottom:0}.dot{width:38px;height:38px;border-radius:12px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:18px;flex:0 0 auto}.grow{flex:1;min-width:0}.title{font-weight:700}.sub{color:var(--muted);font-size:12px;margin-top:3px;line-height:1.45}.amt{font-weight:800;white-space:nowrap}.empty{color:var(--muted);text-align:center;padding:20px 8px}
-    nav{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(560px,100%);background:rgba(255,255,255,.95);backdrop-filter:blur(18px);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(6,1fr);padding:8px 6px calc(8px + env(safe-area-inset-bottom));z-index:10}.navbtn{border:0;background:transparent;padding:7px 1px;color:#64748b;font-size:10px}.navbtn b{display:block;font-size:20px;margin-bottom:3px}.navbtn.active{color:#111827;font-weight:800}
+    nav{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(560px,100%);background:rgba(255,255,255,.95);backdrop-filter:blur(18px);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(7,1fr);padding:8px 4px calc(8px + env(safe-area-inset-bottom));z-index:10}.navbtn{border:0;background:transparent;padding:7px 0;color:#64748b;font-size:9px}.navbtn b{display:block;font-size:18px;margin-bottom:3px}.navbtn.active{color:#111827;font-weight:800}
     .page{display:none}.page.active{display:block}.form-card{background:#fff;border-radius:20px;padding:16px;box-shadow:0 8px 24px rgba(15,23,42,.06)}label{display:block;font-size:13px;color:#475569;margin:12px 0 6px}input,select,textarea{width:100%;border:1px solid #dbe0e7;border-radius:14px;padding:13px 14px;font-size:16px;background:#fff}textarea{min-height:100px;resize:vertical}.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}.seg button{padding:12px;border-radius:14px;border:1px solid #dbe0e7;background:#fff;font-weight:800}.seg button.on{background:#111827;color:#fff;border-color:#111827}
     .primary{width:100%;border:0;background:#111827;color:#fff;border-radius:16px;padding:14px;margin-top:16px;font-size:16px;font-weight:800}.secondary{width:100%;border:1px solid #dbe0e7;background:#fff;border-radius:16px;padding:13px;margin-top:10px;font-weight:800}.danger{color:#b91c1c}.warn{background:#fff7ed;border:1px solid #fed7aa}
     .small{font-size:12px;color:var(--muted);line-height:1.55}.inline-actions{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}.mini{border:1px solid #dbe0e7;background:#fff;border-radius:12px;padding:7px 9px;font-weight:700;font-size:12px}.monthpick{display:flex;gap:8px;align-items:center}.monthpick input,.monthpick select{width:auto;flex:1}.check{display:flex;align-items:center;gap:10px;margin-top:14px}.check input{width:auto}.badge{display:inline-block;border-radius:999px;padding:3px 7px;font-size:11px;background:#eef2ff;color:#334155;margin-right:4px}.toast{position:fixed;left:50%;bottom:104px;transform:translateX(-50%);background:#111827;color:#fff;padding:10px 14px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:.2s;z-index:20}.toast.show{opacity:1}
-    .statbar{height:12px;border-radius:999px;background:#eef2f7;overflow:hidden;margin-top:8px}.statbar i{display:block;height:100%;background:#111827;border-radius:999px}
+    .statbar{height:12px;border-radius:999px;background:#eef2f7;overflow:hidden;margin-top:8px}.statbar i{display:block;height:100%;background:#111827;border-radius:999px}.import-drop{border:2px dashed #cbd5e1;border-radius:18px;padding:22px 14px;text-align:center;background:#f8fafc}.import-drop input{margin-top:12px}.toolbar{display:grid;grid-template-columns:1fr 1fr;gap:8px}.toolbar .secondary{margin-top:0}.preview-head{display:flex;align-items:center;gap:8px}.preview-head input,.import-check{width:20px;height:20px;flex:0 0 auto}.import-row{align-items:center}.import-row.duplicate{opacity:.55}.import-row select{padding:8px;font-size:13px;border-radius:10px}.status-private{background:#f1f5f9}.status-possible{background:#fff7ed;color:#9a3412}.status-deductible{background:#ecfdf5;color:#166534}.history-total{font-weight:800;color:#334155}.file-note{margin-top:10px;color:#64748b;font-size:12px;line-height:1.5}
   </style>
 </head>
 <body>
@@ -45,7 +45,7 @@
       <label>账户</label><select id="txAccount"><option>个人</option><option>家庭</option><option>公司</option><option>现金</option></select>
       <label>备注</label><input id="txNote" placeholder="例如：Costco 购物 / 公司油费" />
       <label>日期</label><input id="txDate" type="date" />
-      <div class="check"><input id="txDeductible" type="checkbox"><label for="txDeductible" style="margin:0">标记为“可能可抵税”</label></div>
+      <label>税务用途</label><select id="txTaxStatus"><option value="private">私人 / Private</option><option value="possible">可能可抵税 / Possible deductible</option><option value="deductible">可抵税 / Deductible</option></select>
       <label>GST 金额（可选）</label><input id="txGST" inputmode="decimal" placeholder="0.00" />
       <label>发票 / 账单 / 收据（图片或 PDF）</label><input id="txReceipt" type="file" accept="image/*,application/pdf" />
       <div id="receiptStatus" class="small"></div>
@@ -75,6 +75,19 @@
     <div class="card"><div class="title">支出分类</div><div id="categoryStats"></div></div>
   </section>
 
+  <section id="bank" class="page">
+    <div class="top"><div class="brand"><h1>Bank Import</h1><p>银行交易导入 · 文件只在本机处理</p></div></div>
+    <div class="card import-drop"><div class="dot" style="margin:0 auto">🏦</div><div class="title" style="margin-top:10px">选择网银交易文件</div><div class="file-note">支持 Commonwealth Bank、Westpac、ANZ、NAB 常见 CSV，以及基础 OFX / QFX 格式。</div><input id="bankFile" type="file" accept=".csv,.ofx,.qfx,text/csv,application/x-ofx" onchange="loadBankFile(event)"></div>
+    <div id="importSummary" class="card small" style="display:none"></div>
+    <div id="importTools" style="display:none">
+      <div class="card"><div class="title">批量处理已选交易</div><label>分类</label><select id="bulkCategory"></select><button class="secondary" onclick="applyBulkCategory()">应用分类</button><label>税务用途</label><select id="bulkTax"><option value="private">私人 / Private</option><option value="possible">可能可抵税 / Possible deductible</option><option value="deductible">可抵税 / Deductible</option></select><button class="secondary" onclick="applyBulkTax()">应用税务用途</button></div>
+      <div class="card"><div class="preview-head"><input id="selectAllImport" type="checkbox" checked onchange="toggleAllImport(this.checked)"><div><div class="title">导入预览</div><div class="small">重复交易默认不选择，可逐笔修改分类与税务用途。</div></div></div><div id="importPreview"></div></div>
+      <button class="primary" onclick="confirmBankImport()">确认导入已选交易</button>
+      <button class="secondary" onclick="clearImportPreview()">取消本次导入</button>
+    </div>
+    <div class="section-title"><h2>导入历史</h2></div><div class="card" id="importHistory"></div>
+  </section>
+
   <section id="tax" class="page">
     <div class="top"><div class="brand"><h1>Tax Centre</h1><p>按澳洲财政年度整理资料</p></div></div>
     <div class="card monthpick"><select id="fySelect" onchange="renderTax()"></select></div>
@@ -102,6 +115,7 @@
   <button class="navbtn" data-page="add" onclick="newTx()"><b>＋</b>记账</button>
   <button class="navbtn" data-page="life" onclick="go('life')"><b>◫</b>生活</button>
   <button class="navbtn" data-page="reminders" onclick="go('reminders')"><b>◉</b>提醒</button>
+  <button class="navbtn" data-page="bank" onclick="go('bank')"><b>⇩</b>导入</button>
   <button class="navbtn" data-page="tax" onclick="go('tax')"><b>🧾</b>税务</button>
   <button class="navbtn" data-page="me" onclick="go('me')"><b>⚙︎</b>我的</button>
 </nav>
@@ -111,6 +125,7 @@
 const $=id=>document.getElementById(id);
 const store={get:k=>JSON.parse(localStorage.getItem(k)||'[]'),set:(k,v)=>localStorage.setItem(k,JSON.stringify(v))};
 const fmt=n=>new Intl.NumberFormat('en-AU',{style:'currency',currency:'AUD',maximumFractionDigits:2}).format(Number(n||0));
+const categories=['Groceries','Transport','Fuel','Dining','Shopping','Household','Travel','Business','Baby','Office supplies','Phone & Internet','Accounting & Legal','Income','Other'];
 function localDate(d=new Date()){const z=new Date(d.getTime()-d.getTimezoneOffset()*60000);return z.toISOString().slice(0,10)}
 function toast(t){$('toast').textContent=t;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),1600)}
 function esc(s=''){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
@@ -134,7 +149,7 @@ async function clearAttachments(){const d=await db();return new Promise((res,rej
 function go(p){
   document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===p));
   document.querySelectorAll('.navbtn').forEach(x=>x.classList.toggle('active',x.dataset.page===p));
-  if(p==='home')renderHome();if(p==='life')renderLife();if(p==='reminders')renderReminders();if(p==='stats')renderStats();if(p==='tax')renderTax();
+  if(p==='home')renderHome();if(p==='life')renderLife();if(p==='reminders')renderReminders();if(p==='stats')renderStats();if(p==='tax')renderTax();if(p==='bank')renderImportHistory();
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
@@ -144,19 +159,19 @@ function newTx(){cancelTxEdit();go('add')}
 function presetTx(t,c){newTx();setTxType(t);$('txCategory').value=c;$('txAmount').focus()}
 function cancelTxEdit(){
   editTxId=null;$('txFormTitle').textContent='记一笔';$('saveTxBtn').textContent='保存记录';$('cancelEditBtn').style.display='none';
-  $('txAmount').value='';$('txNote').value='';$('txGST').value='';$('txDeductible').checked=false;$('txReceipt').value='';$('receiptStatus').textContent='';setTxType('expense');$('txDate').value=localDate();
+  $('txAmount').value='';$('txNote').value='';$('txGST').value='';$('txTaxStatus').value='private';$('txReceipt').value='';$('receiptStatus').textContent='';setTxType('expense');$('txDate').value=localDate();
 }
 async function saveTx(){
   const a=parseFloat($('txAmount').value);if(!a||a<=0)return toast('请输入金额');
   const arr=store.get('jlife_tx'); const id=editTxId||Date.now();
-  const obj={id,type:txType,amount:a,category:$('txCategory').value,account:$('txAccount').value,note:$('txNote').value.trim(),date:$('txDate').value||localDate(),deductible:$('txDeductible').checked,gst:parseFloat($('txGST').value)||0};
+  const taxStatus=$('txTaxStatus').value;const obj={id,type:txType,amount:a,category:$('txCategory').value,account:$('txAccount').value,note:$('txNote').value.trim(),date:$('txDate').value||localDate(),taxStatus,deductible:taxStatus!=='private',gst:parseFloat($('txGST').value)||0};
   const idx=arr.findIndex(x=>x.id===id); if(idx>=0)arr[idx]=obj; else arr.unshift(obj); store.set('jlife_tx',arr);
   const file=$('txReceipt').files[0]; if(file)await putAttachment(id,file);
   toast(editTxId?'已修改':'已保存');cancelTxEdit();renderHome();go('home');
 }
 async function editTx(id){
   const x=store.get('jlife_tx').find(v=>v.id===id);if(!x)return;
-  editTxId=id;setTxType(x.type);$('txAmount').value=x.amount;$('txCategory').value=x.category;$('txAccount').value=x.account;$('txNote').value=x.note||'';$('txDate').value=x.date;$('txDeductible').checked=!!x.deductible;$('txGST').value=x.gst||'';
+  editTxId=id;setTxType(x.type);$('txAmount').value=x.amount;$('txCategory').value=x.category;$('txAccount').value=x.account;$('txNote').value=x.note||'';$('txDate').value=x.date;$('txTaxStatus').value=x.taxStatus||(x.deductible?'possible':'private');$('txGST').value=x.gst||'';
   const at=await getAttachment(id);$('receiptStatus').textContent=at?'当前已有附件：'+at.name:'当前没有附件';
   $('txFormTitle').textContent='修改记录';$('saveTxBtn').textContent='保存修改';$('cancelEditBtn').style.display='block';go('add');
 }
@@ -195,15 +210,47 @@ function renderReminderPreview(){const a=store.get('jlife_rem').filter(x=>!x.don
 function renderReminders(){const a=store.get('jlife_rem');$('reminderList').innerHTML=a.length?a.map(x=>`<div class="row"><div class="dot">${x.done?'✓':'⏰'}</div><div class="grow"><div class="title" style="${x.done?'text-decoration:line-through;opacity:.55':''}">${esc(x.title)}</div><div class="sub">${new Date(x.when).toLocaleString('zh-CN')}</div><div class="inline-actions"><button class="mini" onclick="toggleRem(${x.id})">${x.done?'恢复':'完成'}</button><button class="mini" onclick="editRem(${x.id})">修改</button><button class="mini" onclick="calendarRem(${x.id})">加入日历</button><button class="mini danger" onclick="delRem(${x.id})">删除</button></div></div></div>`).join(''):'<div class="empty">还没有提醒</div>';renderReminderPreview()}
 function calendarRem(id){const x=store.get('jlife_rem').find(v=>v.id===id);if(!x)return;const d=new Date(x.when),end=new Date(d.getTime()+30*60000),f=t=>t.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');const ics=`BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//J Life//CN\r\nBEGIN:VEVENT\r\nUID:${x.id}@jlife\r\nDTSTAMP:${f(new Date())}\r\nDTSTART:${f(d)}\r\nDTEND:${f(end)}\r\nSUMMARY:${x.title.replace(/\n/g,' ')}\r\nBEGIN:VALARM\r\nTRIGGER:-PT15M\r\nACTION:DISPLAY\r\nDESCRIPTION:${x.title.replace(/\n/g,' ')}\r\nEND:VALARM\r\nEND:VEVENT\r\nEND:VCALENDAR`;downloadBlob(ics,'text/calendar',`JLife-${x.id}.ics`)}
 
+let importRows=[],importFileName='';
+const builtinRules=[
+  {terms:['woolworths','coles'],category:'Groceries'},{terms:['uber'],category:'Transport'},
+  {terms:['bp ','bp australia','caltex','ampol'],category:'Fuel'},
+  {terms:['salary','payroll','wages','transfer in'],category:'Income',type:'income'}
+];
+function norm(s=''){return String(s).toLowerCase().replace(/[^a-z0-9]+/g,' ').trim()}
+function txFingerprint(x){return [x.date,Number(x.amount).toFixed(2),x.type,norm(x.note||x.description)].join('|')}
+function csvLine(line){const out=[];let cur='',q=false;for(let i=0;i<line.length;i++){const c=line[i];if(c==='"'&&line[i+1]==='"'&&q){cur+='"';i++}else if(c==='"')q=!q;else if(c===','&&!q){out.push(cur.trim());cur=''}else cur+=c}out.push(cur.trim());return out}
+function cleanAmount(v){if(v==null)return NaN;let s=String(v).replace(/[\s,$]/g,'');let neg=s.startsWith('(')&&s.endsWith(')');s=s.replace(/[()]/g,'');const n=parseFloat(s);return neg?-n:n}
+function parseDate(v){const s=String(v||'').trim();if(/^\d{8}$/.test(s))return `${s.slice(0,4)}-${s.slice(4,6)}-${s.slice(6,8)}`;let m=s.match(/^(\d{1,2})[\/-](\d{1,2})[\/-](\d{2,4})/);if(m){let y=m[3].length===2?'20'+m[3]:m[3];return `${y}-${m[2].padStart(2,'0')}-${m[1].padStart(2,'0')}`}const d=new Date(s);return isNaN(d)?'':localDate(d)}
+function findCol(headers,names){return headers.findIndex(h=>names.some(n=>norm(h)===norm(n)||norm(h).includes(norm(n))))}
+function classify(description,type){const text=norm(description),custom=store.get('jlife_rules');const r=[...custom,...builtinRules].find(x=>(x.terms||[x.term]).some(t=>text.includes(norm(t)))&&(!x.type||x.type===type));return r?.category||(type==='income'?'Income':'Other')}
+function detectBank(headers){const h=norm(headers.join(' '));if(h.includes('bankwest')||h.includes('cba'))return'Commonwealth Bank';if(h.includes('westpac'))return'Westpac';if(h.includes('anz'))return'ANZ';if(h.includes('nab'))return'NAB';return'Australian bank CSV'}
+function parseCSV(text){const lines=text.replace(/^\uFEFF/,'').split(/\r?\n/).filter(x=>x.trim());if(!lines.length)throw new Error('CSV 文件没有交易资料');let headerAt=lines.findIndex((l,i)=>i<10&&/(date|日期)/i.test(l)&&/(amount|debit|credit|description|narrative|details)/i.test(l));let headers=headerAt>=0?csvLine(lines[headerAt]):[];let dateI=findCol(headers,['date','transaction date','processed date','value date','日期']),descI=findCol(headers,['description','narrative','details','transaction description','memo','particulars','transaction details']),amountI=findCol(headers,['amount','transaction amount']),debitI=findCol(headers,['debit','withdrawal','debit amount']),creditI=findCol(headers,['credit','deposit','credit amount']);let bank=detectBank(headers),dataLines=lines.slice(headerAt+1);if(headerAt<0){const sample=csvLine(lines[0]);if(!parseDate(sample[0])||!Number.isFinite(cleanAmount(sample[1])))throw new Error('无法识别日期、描述或金额列');dateI=0;amountI=1;descI=2;debitI=creditI=-1;dataLines=lines;bank='Commonwealth Bank / headerless CSV'}if(dateI<0||descI<0||(amountI<0&&debitI<0&&creditI<0))throw new Error('无法识别日期、描述或金额列');const rows=[];for(const line of dataLines){const c=csvLine(line);const date=parseDate(c[dateI]),description=(c[descI]||'').trim();let raw=amountI>=0?cleanAmount(c[amountI]):NaN,type='expense',amount=0;if(Number.isFinite(raw)){type=raw<0?'expense':'income';amount=Math.abs(raw)}else{const debit=cleanAmount(c[debitI]),credit=cleanAmount(c[creditI]);if(Number.isFinite(debit)&&debit!==0){type='expense';amount=Math.abs(debit)}else if(Number.isFinite(credit)&&credit!==0){type='income';amount=Math.abs(credit)}}if(date&&description&&amount)rows.push({date,description,type,amount})}if(!rows.length)throw new Error('没有找到可导入的交易');return {bank,rows}}
+function ofxTag(block,tag){return (block.match(new RegExp('<'+tag+'>([^<\\r\\n]+)','i'))||[])[1]?.trim()||''}
+function parseOFX(text){const rows=(text.match(/<STMTTRN>[\s\S]*?<\/STMTTRN>/gi)||text.split(/<STMTTRN>/i).slice(1)).map(b=>{const raw=cleanAmount(ofxTag(b,'TRNAMT')),description=ofxTag(b,'NAME')||ofxTag(b,'MEMO')||'Bank transaction';return{date:parseDate(ofxTag(b,'DTPOSTED').slice(0,8)),description,type:raw<0?'expense':'income',amount:Math.abs(raw)}}).filter(x=>x.date&&x.amount);if(!rows.length)throw new Error('OFX / QFX 中没有可识别的交易');return{bank:'OFX / QFX',rows}}
+async function loadBankFile(ev){const file=ev.target.files[0];if(!file)return;try{const text=await file.text(),parsed=/\.(ofx|qfx)$/i.test(file.name)?parseOFX(text):parseCSV(text),existing=new Set(store.get('jlife_tx').map(txFingerprint));importFileName=file.name;importRows=parsed.rows.map((r,i)=>{const category=classify(r.description,r.type),duplicate=existing.has(txFingerprint({...r,note:r.description}));return{...r,index:i,category,taxStatus:'private',selected:!duplicate,duplicate}});$('importSummary').style.display='block';$('importSummary').innerHTML=`<b>${esc(parsed.bank)}</b> · ${importRows.length} 笔交易<br>${importRows.filter(x=>x.duplicate).length} 笔疑似重复，已自动取消选择。`;$('importTools').style.display='block';renderImportPreview();toast('文件已在本机读取')}catch(e){alert('导入失败：'+e.message)}finally{ev.target.value=''}}
+function categoryOptions(value){return categories.map(c=>`<option ${c===value?'selected':''}>${esc(c)}</option>`).join('')}
+function taxOptions(value){return [['private','Private'],['possible','Possible deductible'],['deductible','Deductible']].map(([v,l])=>`<option value="${v}" ${v===value?'selected':''}>${l}</option>`).join('')}
+function renderImportPreview(){$('bulkCategory').innerHTML=categoryOptions('Other');$('importPreview').innerHTML=importRows.length?importRows.map((x,i)=>`<div class="row import-row ${x.duplicate?'duplicate':''}"><input class="import-check" type="checkbox" ${x.selected?'checked':''} onchange="setImportSelected(${i},this.checked)"><div class="grow"><div class="title">${esc(x.description)}</div><div class="sub">${x.date} · ${x.type==='income'?'收入':'支出'} ${fmt(x.amount)} ${x.duplicate?'<span class="badge">疑似重复</span>':''}</div><select onchange="changeImportCategory(${i},this.value)">${categoryOptions(x.category)}</select><select onchange="importRows[${i}].taxStatus=this.value">${taxOptions(x.taxStatus)}</select><div class="inline-actions"><button class="mini" onclick="saveRuleForRow(${i})">以后同类自动归类</button></div></div></div>`).join(''):'<div class="empty">没有可预览的交易</div>'}
+function setImportSelected(i,v){importRows[i].selected=v}
+function toggleAllImport(v){importRows.forEach(x=>x.selected=v&&!x.duplicate);renderImportPreview()}
+function changeImportCategory(i,v){importRows[i].category=v}
+function applyBulkCategory(){const v=$('bulkCategory').value;importRows.filter(x=>x.selected).forEach(x=>x.category=v);renderImportPreview()}
+function applyBulkTax(){const v=$('bulkTax').value;importRows.filter(x=>x.selected).forEach(x=>x.taxStatus=v);renderImportPreview()}
+function saveRuleForRow(i){const x=importRows[i],term=prompt('以后描述中包含什么文字时，自动归到 '+x.category+'？',x.description);if(!term)return;const rules=store.get('jlife_rules');rules.unshift({term:term.trim(),terms:[term.trim()],category:x.category,type:x.type});store.set('jlife_rules',rules);toast('本地分类规则已保存')}
+function confirmBankImport(){const chosen=importRows.filter(x=>x.selected);if(!chosen.length)return toast('请至少选择一笔交易');const batchId=Date.now(),tx=store.get('jlife_tx'),ids=[];chosen.forEach((x,i)=>{const id=batchId+i+1;ids.push(id);tx.unshift({id,type:x.type,amount:x.amount,category:x.category,account:'Bank Import',note:x.description,date:x.date,taxStatus:x.taxStatus,deductible:x.taxStatus!=='private',gst:0,importBatchId:batchId})});store.set('jlife_tx',tx);const h=store.get('jlife_import_history');h.unshift({id:batchId,fileName:importFileName,importedAt:new Date().toISOString(),count:chosen.length,total:chosen.reduce((s,x)=>s+x.amount,0),txIds:ids,undone:false});store.set('jlife_import_history',h);clearImportPreview();renderImportHistory();renderHome();toast(`已导入 ${chosen.length} 笔交易`)}
+function clearImportPreview(){importRows=[];importFileName='';$('importSummary').style.display='none';$('importTools').style.display='none';$('importPreview').innerHTML=''}
+function renderImportHistory(){const h=store.get('jlife_import_history');$('importHistory').innerHTML=h.length?h.map((x,i)=>`<div class="row"><div class="dot">${x.undone?'↩':'⇩'}</div><div class="grow"><div class="title">${esc(x.fileName||'Bank file')}</div><div class="sub">${new Date(x.importedAt).toLocaleString('zh-CN')} · ${x.count} 笔</div>${i===0&&!x.undone?`<div class="inline-actions"><button class="mini danger" onclick="undoLatestImport(${x.id})">撤销最近一次导入</button></div>`:''}</div><div class="history-total">${x.undone?'已撤销':fmt(x.total)}</div></div>`).join(''):'<div class="empty">还没有导入记录</div>'}
+function undoLatestImport(id){const h=store.get('jlife_import_history'),latest=h.find(x=>!x.undone);if(!latest||latest.id!==id)return toast('只能撤销最近一次有效导入');if(!confirm(`撤销 ${latest.count} 笔导入交易？`))return;const ids=new Set(latest.txIds||[]);store.set('jlife_tx',store.get('jlife_tx').filter(x=>!ids.has(x.id)));latest.undone=true;store.set('jlife_import_history',h);renderImportHistory();renderHome();renderTax();toast('最近一次导入已撤销')}
+
 function renderStats(){const m=$('statsMonth').value||localDate().slice(0,7);$('statsMonth').value=m;const a=store.get('jlife_tx').filter(x=>x.date.startsWith(m));let inc=0,exp=0,c={};a.forEach(x=>{if(x.type==='income')inc+=x.amount;else{exp+=x.amount;c[x.category]=(c[x.category]||0)+x.amount}});$('sIncome').textContent=fmt(inc);$('sExpense').textContent=fmt(exp);const max=Math.max(1,...Object.values(c));const rows=Object.entries(c).sort((a,b)=>b[1]-a[1]);$('categoryStats').innerHTML=rows.length?rows.map(([k,v])=>`<div style="margin-top:14px"><div style="display:flex;justify-content:space-between"><span>${esc(k)}</span><b>${fmt(v)}</b></div><div class="statbar"><i style="width:${Math.round(v/max*100)}%"></i></div></div>`).join(''):'<div class="empty">这个月还没有支出</div>'}
 
 function fyBounds(label){const y=parseInt(label.slice(0,4));return {start:`${y}-07-01`,end:`${y+1}-06-30`}}
 function initFY(){const now=new Date(),y=now.getMonth()>=6?now.getFullYear():now.getFullYear()-1;const opts=[];for(let i=0;i<6;i++){const s=y-i;opts.push(`${s}-${String(s+1).slice(-2)}`)}$('fySelect').innerHTML=opts.map(x=>`<option>${x}</option>`).join('')}
 async function renderTax(){
   const label=$('fySelect').value,{start,end}=fyBounds(label),a=store.get('jlife_tx').filter(x=>x.date>=start&&x.date<=end);let inc=0,exp=0,ded=0,gst=0,missing=0;const rows=[];
-  for(const x of a){if(x.type==='income')inc+=x.amount;else exp+=x.amount;if(x.deductible){ded+=x.amount;gst+=Number(x.gst||0);const at=await getAttachment(x.id);if(!at)missing++;rows.push({...x,hasAttachment:!!at})}}
+  for(const x of a){if(x.type==='income')inc+=x.amount;else exp+=x.amount;const status=x.taxStatus||(x.deductible?'possible':'private');if(status!=='private'){ded+=x.amount;gst+=Number(x.gst||0);const at=await getAttachment(x.id);if(!at)missing++;rows.push({...x,taxStatus:status,hasAttachment:!!at})}}
   $('fyIncome').textContent=fmt(inc);$('fyExpense').textContent=fmt(exp);$('fyDeductible').textContent=fmt(ded);$('fyGST').textContent=fmt(gst);$('missingReceipts').textContent=`${missing} 笔`;
-  $('taxList').innerHTML=rows.length?rows.sort((a,b)=>b.date.localeCompare(a.date)).map(x=>`<div class="row"><div class="dot">🧾</div><div class="grow"><div class="title">${esc(x.category)} · ${fmt(x.amount)}</div><div class="sub">${x.date}${x.note?' · '+esc(x.note):''} · GST ${fmt(x.gst||0)} · ${x.hasAttachment?'有发票':'缺发票'}</div><div class="inline-actions"><button class="mini" onclick="editTx(${x.id})">修改</button><button class="mini" onclick="viewReceipt(${x.id})">查看发票</button></div></div></div>`).join(''):'<div class="empty">这个财政年度还没有标记为“可能可抵税”的记录</div>';
+  $('taxList').innerHTML=rows.length?rows.sort((a,b)=>b.date.localeCompare(a.date)).map(x=>`<div class="row"><div class="dot">🧾</div><div class="grow"><div class="title">${esc(x.category)} · ${fmt(x.amount)}</div><div class="sub">${x.date}${x.note?' · '+esc(x.note):''} · <span class="badge status-${x.taxStatus}">${x.taxStatus==='deductible'?'可抵税':'可能可抵税'}</span> · GST ${fmt(x.gst||0)} · ${x.hasAttachment?'有发票':'缺发票'}</div><div class="inline-actions"><button class="mini" onclick="editTx(${x.id})">修改</button><button class="mini" onclick="viewReceipt(${x.id})">查看发票</button></div></div></div>`).join(''):'<div class="empty">这个财政年度还没有标记为可抵税的记录</div>';
 }
 
 function exportCSV(){const a=store.get('jlife_tx');let s='date,type,category,account,amount,gst,deductible,note\n'+a.map(x=>[x.date,x.type,x.category,x.account,x.amount,x.gst||0,x.deductible?'yes':'no',`"${(x.note||'').replace(/"/g,'""')}"`].join(',')).join('\n');downloadBlob('\ufeff'+s,'text/csv;charset=utf-8','JLife-transactions.csv')}
@@ -215,22 +262,22 @@ async function exportJSON(){
   toast('正在制作完整备份…');
   const ats=await allAttachments(),attachments=[];
   for(const a of ats)attachments.push({txId:a.txId,name:a.name,type:a.type,data:await blobToDataURL(a.blob)});
-  const data={version:2,transactions:store.get('jlife_tx'),life:store.get('jlife_life'),reminders:store.get('jlife_rem'),attachments,exportedAt:new Date().toISOString()};
+  const data={version:3,transactions:store.get('jlife_tx'),life:store.get('jlife_life'),reminders:store.get('jlife_rem'),rules:store.get('jlife_rules'),importHistory:store.get('jlife_import_history'),attachments,exportedAt:new Date().toISOString()};
   downloadBlob(JSON.stringify(data),'application/json','JLife-full-backup.json');toast('完整备份已导出');
 }
 async function restoreJSON(ev){
   const file=ev.target.files[0];if(!file)return;if(!confirm('恢复会覆盖当前 J Life 数据，确定继续吗？')){ev.target.value='';return}
   try{
     const data=JSON.parse(await file.text());if(!Array.isArray(data.transactions)||!Array.isArray(data.life)||!Array.isArray(data.reminders))throw new Error('格式不正确');
-    store.set('jlife_tx',data.transactions);store.set('jlife_life',data.life);store.set('jlife_rem',data.reminders);await clearAttachments();
+    store.set('jlife_tx',data.transactions);store.set('jlife_life',data.life);store.set('jlife_rem',data.reminders);store.set('jlife_rules',data.rules||[]);store.set('jlife_import_history',data.importHistory||[]);await clearAttachments();
     for(const a of (data.attachments||[])){const b=dataURLToBlob(a.data);await putAttachment(a.txId,new File([b],a.name||'attachment',{type:a.type||b.type}))}
     toast('恢复完成');renderHome();renderTax();
   }catch(e){alert('恢复失败：'+e.message)}finally{ev.target.value=''}
 }
 function downloadBlob(content,type,name){const b=new Blob([content],{type}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
-async function clearAll(){if(confirm('确定清空 J Life 的全部数据和发票吗？此操作不能撤销。')){['jlife_tx','jlife_life','jlife_rem'].forEach(k=>localStorage.removeItem(k));await clearAttachments();renderHome();renderTax();toast('已清空')}}
+async function clearAll(){if(confirm('确定清空 J Life 的全部数据和发票吗？此操作不能撤销。')){['jlife_tx','jlife_life','jlife_rem','jlife_rules','jlife_import_history'].forEach(k=>localStorage.removeItem(k));await clearAttachments();renderHome();renderTax();renderImportHistory();toast('已清空')}}
 
-$('txDate').value=localDate();$('lifeDate').value=localDate();$('statsMonth').value=localDate().slice(0,7);$('todayText').textContent=new Date().toLocaleDateString('zh-CN',{weekday:'long',month:'long',day:'numeric'});cancelRemEdit();initFY();renderHome();
+$('txDate').value=localDate();$('lifeDate').value=localDate();$('statsMonth').value=localDate().slice(0,7);$('todayText').textContent=new Date().toLocaleDateString('zh-CN',{weekday:'long',month:'long',day:'numeric'});cancelRemEdit();initFY();renderHome();renderImportHistory();
 </script>
 </body>
 </html>
