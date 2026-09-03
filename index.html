@@ -7,60 +7,64 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="J Life" />
-  <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="apple-touch-icon" href="icon-180.png" />
   <title>J Life</title>
   <style>
-    :root { --bg:#f6f7fb; --card:#fff; --ink:#111827; --muted:#6b7280; --line:#e5e7eb; --accent:#111827; --good:#15803d; --bad:#b91c1c; --soft:#eef2ff; }
-    *{box-sizing:border-box} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang SC","Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink)}
-    .app{max-width:560px;margin:0 auto;min-height:100vh;padding:calc(12px + env(safe-area-inset-top)) 16px calc(92px + env(safe-area-inset-bottom))}
+    :root{--bg:#f6f7fb;--card:#fff;--ink:#111827;--muted:#6b7280;--line:#e5e7eb;--good:#15803d;--bad:#b91c1c;--blue:#2563eb;--soft:#eef2ff}
+    *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang SC","Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink)}
+    .app{max-width:560px;margin:0 auto;min-height:100vh;padding:calc(12px + env(safe-area-inset-top)) 16px calc(100px + env(safe-area-inset-bottom))}
     .top{display:flex;justify-content:space-between;align-items:center;margin:6px 0 16px}.brand h1{font-size:28px;margin:0}.brand p{margin:4px 0 0;color:var(--muted);font-size:13px}.pill{background:#111827;color:#fff;border:none;border-radius:999px;padding:10px 14px;font-weight:700}
-    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.card{background:var(--card);border-radius:20px;padding:16px;box-shadow:0 8px 24px rgba(15,23,42,.06);margin-bottom:12px}.metric .label{color:var(--muted);font-size:13px}.metric .value{font-size:26px;font-weight:800;margin-top:6px}.good{color:var(--good)}.bad{color:var(--bad)}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid4{display:grid;grid-template-columns:1fr 1fr;gap:12px}.card{background:var(--card);border-radius:20px;padding:16px;box-shadow:0 8px 24px rgba(15,23,42,.06);margin-bottom:12px}.metric .label{color:var(--muted);font-size:13px}.metric .value{font-size:25px;font-weight:800;margin-top:6px}.good{color:var(--good)}.bad{color:var(--bad)}.blue{color:var(--blue)}
     .section-title{display:flex;align-items:center;justify-content:space-between;margin:18px 2px 10px}.section-title h2{font-size:17px;margin:0}.linkbtn{border:0;background:transparent;color:#334155;font-weight:700}
     .quick{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.q{border:0;background:var(--card);border-radius:18px;padding:14px 6px;box-shadow:0 5px 18px rgba(15,23,42,.05);font-weight:700}.q span{display:block;font-size:22px;margin-bottom:6px}
-    .row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.row:last-child{border-bottom:0}.dot{width:38px;height:38px;border-radius:12px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:18px}.grow{flex:1}.title{font-weight:700}.sub{color:var(--muted);font-size:12px;margin-top:3px}.amt{font-weight:800}.empty{color:var(--muted);text-align:center;padding:20px 8px}
-    nav{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(560px,100%);background:rgba(255,255,255,.94);backdrop-filter:blur(18px);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding:8px 8px calc(8px + env(safe-area-inset-bottom));z-index:10}.navbtn{border:0;background:transparent;padding:8px 2px;color:#64748b;font-size:11px}.navbtn b{display:block;font-size:21px;margin-bottom:3px}.navbtn.active{color:#111827;font-weight:800}
-    .page{display:none}.page.active{display:block}.form-card{background:#fff;border-radius:20px;padding:16px;box-shadow:0 8px 24px rgba(15,23,42,.06)} label{display:block;font-size:13px;color:#475569;margin:12px 0 6px} input,select,textarea{width:100%;border:1px solid #dbe0e7;border-radius:14px;padding:13px 14px;font-size:16px;background:#fff} textarea{min-height:110px;resize:vertical}.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}.seg button{padding:12px;border-radius:14px;border:1px solid #dbe0e7;background:#fff;font-weight:800}.seg button.on{background:#111827;color:#fff;border-color:#111827}.primary{width:100%;border:0;background:#111827;color:#fff;border-radius:16px;padding:14px;margin-top:16px;font-size:16px;font-weight:800}.secondary{width:100%;border:1px solid #dbe0e7;background:#fff;border-radius:16px;padding:13px;margin-top:10px;font-weight:800}.danger{color:#b91c1c}
-    .tabs{display:flex;gap:8px;margin-bottom:12px;overflow:auto}.chip{white-space:nowrap;border:1px solid #dbe0e7;background:#fff;border-radius:999px;padding:8px 12px}.chip.on{background:#111827;color:#fff}.statbar{height:12px;border-radius:999px;background:#eef2f7;overflow:hidden;margin-top:8px}.statbar i{display:block;height:100%;background:#111827;border-radius:999px}.toast{position:fixed;left:50%;bottom:94px;transform:translateX(-50%);background:#111827;color:#fff;padding:10px 14px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:.2s;z-index:20}.toast.show{opacity:1}.small{font-size:12px;color:var(--muted);line-height:1.5}.inline-actions{display:flex;gap:8px;margin-top:8px}.mini{border:1px solid #dbe0e7;background:#fff;border-radius:12px;padding:8px 10px;font-weight:700}.monthpick{display:flex;gap:8px;align-items:center}.monthpick input{width:auto;flex:1}
+    .row{display:flex;align-items:flex-start;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}.row:last-child{border-bottom:0}.dot{width:38px;height:38px;border-radius:12px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:18px;flex:0 0 auto}.grow{flex:1;min-width:0}.title{font-weight:700}.sub{color:var(--muted);font-size:12px;margin-top:3px;line-height:1.45}.amt{font-weight:800;white-space:nowrap}.empty{color:var(--muted);text-align:center;padding:20px 8px}
+    nav{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(560px,100%);background:rgba(255,255,255,.95);backdrop-filter:blur(18px);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(6,1fr);padding:8px 6px calc(8px + env(safe-area-inset-bottom));z-index:10}.navbtn{border:0;background:transparent;padding:7px 1px;color:#64748b;font-size:10px}.navbtn b{display:block;font-size:20px;margin-bottom:3px}.navbtn.active{color:#111827;font-weight:800}
+    .page{display:none}.page.active{display:block}.form-card{background:#fff;border-radius:20px;padding:16px;box-shadow:0 8px 24px rgba(15,23,42,.06)}label{display:block;font-size:13px;color:#475569;margin:12px 0 6px}input,select,textarea{width:100%;border:1px solid #dbe0e7;border-radius:14px;padding:13px 14px;font-size:16px;background:#fff}textarea{min-height:100px;resize:vertical}.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}.seg button{padding:12px;border-radius:14px;border:1px solid #dbe0e7;background:#fff;font-weight:800}.seg button.on{background:#111827;color:#fff;border-color:#111827}
+    .primary{width:100%;border:0;background:#111827;color:#fff;border-radius:16px;padding:14px;margin-top:16px;font-size:16px;font-weight:800}.secondary{width:100%;border:1px solid #dbe0e7;background:#fff;border-radius:16px;padding:13px;margin-top:10px;font-weight:800}.danger{color:#b91c1c}.warn{background:#fff7ed;border:1px solid #fed7aa}
+    .small{font-size:12px;color:var(--muted);line-height:1.55}.inline-actions{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}.mini{border:1px solid #dbe0e7;background:#fff;border-radius:12px;padding:7px 9px;font-weight:700;font-size:12px}.monthpick{display:flex;gap:8px;align-items:center}.monthpick input,.monthpick select{width:auto;flex:1}.check{display:flex;align-items:center;gap:10px;margin-top:14px}.check input{width:auto}.badge{display:inline-block;border-radius:999px;padding:3px 7px;font-size:11px;background:#eef2ff;color:#334155;margin-right:4px}.toast{position:fixed;left:50%;bottom:104px;transform:translateX(-50%);background:#111827;color:#fff;padding:10px 14px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:.2s;z-index:20}.toast.show{opacity:1}
+    .statbar{height:12px;border-radius:999px;background:#eef2f7;overflow:hidden;margin-top:8px}.statbar i{display:block;height:100%;background:#111827;border-radius:999px}
   </style>
 </head>
 <body>
 <div class="app">
   <section id="home" class="page active">
-    <div class="top"><div class="brand"><h1>J Life</h1><p id="todayText"></p></div><button class="pill" onclick="go('add')">＋ 记录</button></div>
+    <div class="top"><div class="brand"><h1>J Life</h1><p id="todayText"></p></div><button class="pill" onclick="newTx()">＋ 记录</button></div>
     <div class="grid2"><div class="card metric"><div class="label">本月收入</div><div id="mIncome" class="value good">$0</div></div><div class="card metric"><div class="label">本月支出</div><div id="mExpense" class="value bad">$0</div></div></div>
     <div class="card metric"><div class="label">本月净结余</div><div id="mNet" class="value">$0</div></div>
     <div class="section-title"><h2>快速记录</h2></div>
     <div class="quick"><button class="q" onclick="presetTx('expense','餐饮')"><span>🍜</span>吃饭</button><button class="q" onclick="presetTx('expense','购物')"><span>🛍️</span>购物</button><button class="q" onclick="presetTx('income','收入')"><span>💰</span>收入</button><button class="q" onclick="go('life')"><span>📖</span>生活</button></div>
-    <div class="section-title"><h2>今天的记录</h2><button class="linkbtn" onclick="go('stats')">查看统计</button></div>
-    <div class="card" id="todayList"></div>
+    <div class="section-title"><h2>今天的记录</h2><button class="linkbtn" onclick="go('stats')">查看统计</button></div><div class="card" id="todayList"></div>
     <div class="section-title"><h2>近期提醒</h2></div><div class="card" id="reminderPreview"></div>
   </section>
 
   <section id="add" class="page">
-    <div class="top"><div class="brand"><h1>记一笔</h1><p>收入和支出</p></div></div>
+    <div class="top"><div class="brand"><h1 id="txFormTitle">记一笔</h1><p>收入、支出、发票与税务资料</p></div></div>
     <div class="form-card">
       <div class="seg"><button id="expenseBtn" class="on" onclick="setTxType('expense')">支出</button><button id="incomeBtn" onclick="setTxType('income')">收入</button></div>
       <label>金额（AUD）</label><input id="txAmount" inputmode="decimal" placeholder="0.00" />
-      <label>分类</label><select id="txCategory"><option>餐饮</option><option>购物</option><option>家庭</option><option>汽车</option><option>旅行</option><option>公司</option><option>宝宝</option><option>收入</option><option>其他</option></select>
+      <label>分类</label><select id="txCategory"><option>餐饮</option><option>购物</option><option>家庭</option><option>汽车</option><option>旅行</option><option>公司</option><option>宝宝</option><option>办公用品</option><option>电话网络</option><option>会计法律</option><option>收入</option><option>其他</option></select>
       <label>账户</label><select id="txAccount"><option>个人</option><option>家庭</option><option>公司</option><option>现金</option></select>
-      <label>备注</label><input id="txNote" placeholder="例如：Costco 购物" />
+      <label>备注</label><input id="txNote" placeholder="例如：Costco 购物 / 公司油费" />
       <label>日期</label><input id="txDate" type="date" />
-      <button class="primary" onclick="saveTx()">保存记录</button>
+      <div class="check"><input id="txDeductible" type="checkbox"><label for="txDeductible" style="margin:0">标记为“可能可抵税”</label></div>
+      <label>GST 金额（可选）</label><input id="txGST" inputmode="decimal" placeholder="0.00" />
+      <label>发票 / 账单 / 收据（图片或 PDF）</label><input id="txReceipt" type="file" accept="image/*,application/pdf" />
+      <div id="receiptStatus" class="small"></div>
+      <button class="primary" id="saveTxBtn" onclick="saveTx()">保存记录</button>
+      <button class="secondary" id="cancelEditBtn" style="display:none" onclick="cancelTxEdit()">取消修改</button>
     </div>
-    <div class="card small" style="margin-top:12px">数据保存在这台设备的浏览器本地。清除 Safari 网站数据前，请先到“我的”导出备份。</div>
+    <div class="card small warn" style="margin-top:12px">数据和发票保存在这台设备的浏览器本地。清除 Safari 网站数据或更换设备前，请先到“我的”导出完整备份。</div>
   </section>
 
   <section id="life" class="page">
     <div class="top"><div class="brand"><h1>生活</h1><p>记录值得记住的事</p></div></div>
-    <div class="form-card"><label>标题</label><input id="lifeTitle" placeholder="今天发生了什么？" /><label>内容</label><textarea id="lifeBody" placeholder="写几句就好……"></textarea><label>日期</label><input id="lifeDate" type="date" /><button class="primary" onclick="saveLife()">保存生活记录</button></div>
+    <div class="form-card"><label>标题</label><input id="lifeTitle" placeholder="今天发生了什么？" /><label>内容</label><textarea id="lifeBody" placeholder="写几句就好……"></textarea><label>日期</label><input id="lifeDate" type="date" /><button class="primary" id="saveLifeBtn" onclick="saveLife()">保存生活记录</button><button class="secondary" id="cancelLifeBtn" style="display:none" onclick="cancelLifeEdit()">取消修改</button></div>
     <div class="section-title"><h2>最近记录</h2></div><div class="card" id="lifeList"></div>
   </section>
 
   <section id="reminders" class="page">
     <div class="top"><div class="brand"><h1>提醒</h1><p>重要事情别忘了</p></div></div>
-    <div class="form-card"><label>提醒内容</label><input id="remTitle" placeholder="例如：交 rego" /><label>日期和时间</label><input id="remWhen" type="datetime-local" /><button class="primary" onclick="saveReminder()">保存提醒</button></div>
-    <div class="card small" style="margin-top:12px">网页版不能保证在完全关闭后自动弹出系统通知。每个提醒都可以点“加入日历”，交给 iPhone 日历稳定提醒。</div>
+    <div class="form-card"><label>提醒内容</label><input id="remTitle" placeholder="例如：交 rego" /><label>日期和时间</label><input id="remWhen" type="datetime-local" /><button class="primary" id="saveRemBtn" onclick="saveReminder()">保存提醒</button><button class="secondary" id="cancelRemBtn" style="display:none" onclick="cancelRemEdit()">取消修改</button></div>
+    <div class="card small" style="margin-top:12px">网页版不能保证完全关闭后自动弹出系统通知。重要提醒建议同时点“加入日历”。</div>
     <div class="section-title"><h2>全部提醒</h2></div><div class="card" id="reminderList"></div>
   </section>
 
@@ -71,46 +75,162 @@
     <div class="card"><div class="title">支出分类</div><div id="categoryStats"></div></div>
   </section>
 
+  <section id="tax" class="page">
+    <div class="top"><div class="brand"><h1>Tax Centre</h1><p>按澳洲财政年度整理资料</p></div></div>
+    <div class="card monthpick"><select id="fySelect" onchange="renderTax()"></select></div>
+    <div class="grid4">
+      <div class="card metric"><div class="label">财政年度收入</div><div id="fyIncome" class="value good">$0</div></div>
+      <div class="card metric"><div class="label">财政年度支出</div><div id="fyExpense" class="value bad">$0</div></div>
+      <div class="card metric"><div class="label">可能可抵税</div><div id="fyDeductible" class="value blue">$0</div></div>
+      <div class="card metric"><div class="label">记录的 GST</div><div id="fyGST" class="value">$0</div></div>
+    </div>
+    <div class="card metric"><div class="label">可能可抵税但缺少发票</div><div id="missingReceipts" class="value bad">0 笔</div></div>
+    <button class="secondary" onclick="exportTaxCSV()">导出本财年税务 CSV</button>
+    <div class="section-title"><h2>税务资料</h2></div><div class="card" id="taxList"></div>
+    <div class="card small warn">“可能可抵税”只是资料整理标签，不代表最终一定可以申报。最终是否可抵扣应按实际用途和当年度税务规则确认。</div>
+  </section>
+
   <section id="me" class="page">
-    <div class="top"><div class="brand"><h1>我的</h1><p>J Life v1</p></div></div>
-    <div class="card"><div class="title">数据</div><p class="small">你可以导出 CSV 备份或在 Excel 里查看。</p><button class="secondary" onclick="exportCSV()">导出收支 CSV</button><button class="secondary" onclick="exportJSON()">导出完整备份</button><button class="secondary danger" onclick="clearAll()">清空全部数据</button></div>
-    <div class="card"><div class="title">安装到 iPhone 主屏幕</div><p class="small">用 Safari 打开本页面 → 分享 → “添加到主屏幕”。添加后会像独立 App 一样打开。</p></div>
+    <div class="top"><div class="brand"><h1>我的</h1><p>J Life v2</p></div></div>
+    <div class="card"><div class="title">备份与恢复</div><p class="small">完整备份会包含收支、生活记录、提醒，以及已保存的发票/账单文件。</p><button class="secondary" onclick="exportCSV()">导出收支 CSV</button><button class="secondary" onclick="exportJSON()">导出完整备份</button><button class="secondary" onclick="$('restoreInput').click()">从完整备份恢复</button><input id="restoreInput" type="file" accept="application/json" style="display:none" onchange="restoreJSON(event)"><button class="secondary danger" onclick="clearAll()">清空全部数据</button></div>
+    <div class="card"><div class="title">隐私</div><p class="small">程序代码可以公开，但你输入的记录与附件只保存在当前设备的浏览器存储中，不会自动上传到 GitHub。</p></div>
   </section>
 </div>
+
 <nav>
   <button class="navbtn active" data-page="home" onclick="go('home')"><b>⌂</b>今天</button>
-  <button class="navbtn" data-page="add" onclick="go('add')"><b>＋</b>记账</button>
+  <button class="navbtn" data-page="add" onclick="newTx()"><b>＋</b>记账</button>
   <button class="navbtn" data-page="life" onclick="go('life')"><b>◫</b>生活</button>
   <button class="navbtn" data-page="reminders" onclick="go('reminders')"><b>◉</b>提醒</button>
-  <button class="navbtn" data-page="stats" onclick="go('stats')"><b>▥</b>统计</button>
+  <button class="navbtn" data-page="tax" onclick="go('tax')"><b>🧾</b>税务</button>
+  <button class="navbtn" data-page="me" onclick="go('me')"><b>⚙︎</b>我的</button>
 </nav>
 <div id="toast" class="toast"></div>
+
 <script>
-const $=id=>document.getElementById(id); const store={get:k=>JSON.parse(localStorage.getItem(k)||'[]'),set:(k,v)=>localStorage.setItem(k,JSON.stringify(v))};
-let txType='expense'; const fmt=n=>new Intl.NumberFormat('en-AU',{style:'currency',currency:'AUD',maximumFractionDigits:2}).format(Number(n||0));
+const $=id=>document.getElementById(id);
+const store={get:k=>JSON.parse(localStorage.getItem(k)||'[]'),set:(k,v)=>localStorage.setItem(k,JSON.stringify(v))};
+const fmt=n=>new Intl.NumberFormat('en-AU',{style:'currency',currency:'AUD',maximumFractionDigits:2}).format(Number(n||0));
 function localDate(d=new Date()){const z=new Date(d.getTime()-d.getTimezoneOffset()*60000);return z.toISOString().slice(0,10)}
-function toast(t){$('toast').textContent=t;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),1400)}
-function go(p){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===p));document.querySelectorAll('.navbtn').forEach(x=>x.classList.toggle('active',x.dataset.page===p));if(p==='home')renderHome();if(p==='life')renderLife();if(p==='reminders')renderReminders();if(p==='stats')renderStats();window.scrollTo({top:0,behavior:'smooth'})}
-function setTxType(t){txType=t;$('expenseBtn').classList.toggle('on',t==='expense');$('incomeBtn').classList.toggle('on',t==='income')}
-function presetTx(t,c){go('add');setTxType(t);$('txCategory').value=c;$('txAmount').focus()}
-function saveTx(){const a=parseFloat($('txAmount').value);if(!a||a<=0)return toast('请输入金额');const arr=store.get('jlife_tx');arr.unshift({id:Date.now(),type:txType,amount:a,category:$('txCategory').value,account:$('txAccount').value,note:$('txNote').value.trim(),date:$('txDate').value||localDate()});store.set('jlife_tx',arr);$('txAmount').value='';$('txNote').value='';toast('已保存');renderHome()}
-function saveLife(){const title=$('lifeTitle').value.trim(),body=$('lifeBody').value.trim();if(!title&&!body)return toast('写点内容吧');const arr=store.get('jlife_life');arr.unshift({id:Date.now(),title:title||'生活记录',body,date:$('lifeDate').value||localDate()});store.set('jlife_life',arr);$('lifeTitle').value='';$('lifeBody').value='';toast('已保存');renderLife()}
-function saveReminder(){const title=$('remTitle').value.trim(),when=$('remWhen').value;if(!title||!when)return toast('请填写内容和时间');const arr=store.get('jlife_rem');arr.push({id:Date.now(),title,when,done:false});arr.sort((a,b)=>a.when.localeCompare(b.when));store.set('jlife_rem',arr);$('remTitle').value='';toast('提醒已保存');renderReminders()}
-function renderHome(){const now=new Date(),month=localDate(now).slice(0,7),today=localDate(now),tx=store.get('jlife_tx');let inc=0,exp=0;tx.filter(x=>x.date.startsWith(month)).forEach(x=>x.type==='income'?inc+=x.amount:exp+=x.amount);$('mIncome').textContent=fmt(inc);$('mExpense').textContent=fmt(exp);$('mNet').textContent=fmt(inc-exp);$('mNet').className='value '+(inc-exp>=0?'good':'bad');const td=tx.filter(x=>x.date===today).slice(0,8);$('todayList').innerHTML=td.length?td.map(x=>`<div class="row"><div class="dot">${x.type==='income'?'💰':'💳'}</div><div class="grow"><div class="title">${esc(x.category)}${x.note?' · '+esc(x.note):''}</div><div class="sub">${esc(x.account)}</div></div><div class="amt ${x.type==='income'?'good':'bad'}">${x.type==='income'?'+':'-'}${fmt(x.amount)}</div></div>`).join(''):'<div class="empty">今天还没有记录</div>';renderReminderPreview()}
-function renderLife(){const a=store.get('jlife_life');$('lifeList').innerHTML=a.length?a.slice(0,20).map(x=>`<div class="row"><div class="dot">📖</div><div class="grow"><div class="title">${esc(x.title)}</div><div class="sub">${esc(x.date)}${x.body?' · '+esc(x.body.slice(0,45)):''}</div></div><button class="mini" onclick="delItem('jlife_life',${x.id},renderLife)">删除</button></div>`).join(''):'<div class="empty">还没有生活记录</div>'}
-function renderReminderPreview(){const a=store.get('jlife_rem').filter(x=>!x.done&&new Date(x.when)>=new Date()).slice(0,3);$('reminderPreview').innerHTML=a.length?a.map(x=>`<div class="row"><div class="dot">⏰</div><div class="grow"><div class="title">${esc(x.title)}</div><div class="sub">${new Date(x.when).toLocaleString('zh-CN',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})}</div></div></div>`).join(''):'<div class="empty">没有即将到来的提醒</div>'}
-function renderReminders(){const a=store.get('jlife_rem');$('reminderList').innerHTML=a.length?a.map(x=>`<div class="row"><div class="dot">${x.done?'✓':'⏰'}</div><div class="grow"><div class="title" style="${x.done?'text-decoration:line-through;opacity:.55':''}">${esc(x.title)}</div><div class="sub">${new Date(x.when).toLocaleString('zh-CN')}</div><div class="inline-actions"><button class="mini" onclick="toggleRem(${x.id})">${x.done?'恢复':'完成'}</button><button class="mini" onclick="calendarRem(${x.id})">加入日历</button><button class="mini" onclick="delItem('jlife_rem',${x.id},renderReminders)">删除</button></div></div></div>`).join(''):'<div class="empty">还没有提醒</div>';renderReminderPreview()}
-function toggleRem(id){const a=store.get('jlife_rem'),x=a.find(v=>v.id===id);if(x)x.done=!x.done;store.set('jlife_rem',a);renderReminders()}
-function calendarRem(id){const x=store.get('jlife_rem').find(v=>v.id===id);if(!x)return;const d=new Date(x.when),end=new Date(d.getTime()+30*60000),f=t=>t.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');const ics=`BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//J Life//CN\r\nBEGIN:VEVENT\r\nUID:${x.id}@jlife\r\nDTSTAMP:${f(new Date())}\r\nDTSTART:${f(d)}\r\nDTEND:${f(end)}\r\nSUMMARY:${x.title.replace(/\n/g,' ')}\r\nBEGIN:VALARM\r\nTRIGGER:-PT15M\r\nACTION:DISPLAY\r\nDESCRIPTION:${x.title.replace(/\n/g,' ')}\r\nEND:VALARM\r\nEND:VEVENT\r\nEND:VCALENDAR`;downloadBlob(ics,'text/calendar',`JLife-${x.id}.ics`)}
-function renderStats(){const m=$('statsMonth').value||localDate().slice(0,7);$('statsMonth').value=m;const a=store.get('jlife_tx').filter(x=>x.date.startsWith(m));let inc=0,exp=0,c={};a.forEach(x=>{if(x.type==='income')inc+=x.amount;else{exp+=x.amount;c[x.category]=(c[x.category]||0)+x.amount}});$('sIncome').textContent=fmt(inc);$('sExpense').textContent=fmt(exp);const max=Math.max(1,...Object.values(c));const rows=Object.entries(c).sort((a,b)=>b[1]-a[1]);$('categoryStats').innerHTML=rows.length?rows.map(([k,v])=>`<div style="margin-top:14px"><div style="display:flex;justify-content:space-between"><span>${esc(k)}</span><b>${fmt(v)}</b></div><div class="statbar"><i style="width:${Math.round(v/max*100)}%"></i></div></div>`).join(''):'<div class="empty">这个月还没有支出</div>'}
-function delItem(key,id,cb){const a=store.get(key).filter(x=>x.id!==id);store.set(key,a);cb();renderHome()}
-function exportCSV(){const a=store.get('jlife_tx');let s='date,type,category,account,amount,note\n'+a.map(x=>[x.date,x.type,x.category,x.account,x.amount,`"${(x.note||'').replace(/"/g,'""')}"`].join(',')).join('\n');downloadBlob('\ufeff'+s,'text/csv;charset=utf-8','JLife-transactions.csv')}
-function exportJSON(){const data={transactions:store.get('jlife_tx'),life:store.get('jlife_life'),reminders:store.get('jlife_rem'),exportedAt:new Date().toISOString()};downloadBlob(JSON.stringify(data,null,2),'application/json','JLife-backup.json')}
-function downloadBlob(content,type,name){const b=new Blob([content],{type}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
-function clearAll(){if(confirm('确定清空 J Life 的全部数据吗？此操作不能撤销。')){['jlife_tx','jlife_life','jlife_rem'].forEach(localStorage.removeItem.bind(localStorage));renderHome();toast('已清空')}}
+function toast(t){$('toast').textContent=t;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),1600)}
 function esc(s=''){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
-$('txDate').value=localDate();$('lifeDate').value=localDate();$('statsMonth').value=localDate().slice(0,7);$('todayText').textContent=new Date().toLocaleDateString('zh-CN',{weekday:'long',month:'long',day:'numeric'});const r=new Date(Date.now()+3600000);$('remWhen').value=new Date(r.getTime()-r.getTimezoneOffset()*60000).toISOString().slice(0,16);renderHome();
-if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
-setInterval(()=>{const now=Date.now();store.get('jlife_rem').filter(x=>!x.done).forEach(x=>{const t=new Date(x.when).getTime();if(Math.abs(t-now)<30000&&Notification?.permission==='granted')new Notification('J Life 提醒',{body:x.title})})},30000);
+
+let dbPromise;
+function db(){
+  if(dbPromise)return dbPromise;
+  dbPromise=new Promise((resolve,reject)=>{
+    const req=indexedDB.open('JLifeDB',1);
+    req.onupgradeneeded=e=>{const d=e.target.result;if(!d.objectStoreNames.contains('attachments'))d.createObjectStore('attachments',{keyPath:'txId'})};
+    req.onsuccess=e=>resolve(e.target.result); req.onerror=e=>reject(e.target.error);
+  });
+  return dbPromise;
+}
+async function putAttachment(txId,file){const d=await db();return new Promise((res,rej)=>{const t=d.transaction('attachments','readwrite');t.objectStore('attachments').put({txId,name:file.name,type:file.type,blob:file});t.oncomplete=()=>res();t.onerror=()=>rej(t.error)})}
+async function getAttachment(txId){const d=await db();return new Promise((res,rej)=>{const r=d.transaction('attachments').objectStore('attachments').get(txId);r.onsuccess=()=>res(r.result||null);r.onerror=()=>rej(r.error)})}
+async function deleteAttachment(txId){const d=await db();return new Promise((res,rej)=>{const t=d.transaction('attachments','readwrite');t.objectStore('attachments').delete(txId);t.oncomplete=()=>res();t.onerror=()=>rej(t.error)})}
+async function allAttachments(){const d=await db();return new Promise((res,rej)=>{const r=d.transaction('attachments').objectStore('attachments').getAll();r.onsuccess=()=>res(r.result||[]);r.onerror=()=>rej(r.error)})}
+async function clearAttachments(){const d=await db();return new Promise((res,rej)=>{const t=d.transaction('attachments','readwrite');t.objectStore('attachments').clear();t.oncomplete=()=>res();t.onerror=()=>rej(t.error)})}
+
+function go(p){
+  document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===p));
+  document.querySelectorAll('.navbtn').forEach(x=>x.classList.toggle('active',x.dataset.page===p));
+  if(p==='home')renderHome();if(p==='life')renderLife();if(p==='reminders')renderReminders();if(p==='stats')renderStats();if(p==='tax')renderTax();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+let txType='expense', editTxId=null, editLifeId=null, editRemId=null;
+function setTxType(t){txType=t;$('expenseBtn').classList.toggle('on',t==='expense');$('incomeBtn').classList.toggle('on',t==='income')}
+function newTx(){cancelTxEdit();go('add')}
+function presetTx(t,c){newTx();setTxType(t);$('txCategory').value=c;$('txAmount').focus()}
+function cancelTxEdit(){
+  editTxId=null;$('txFormTitle').textContent='记一笔';$('saveTxBtn').textContent='保存记录';$('cancelEditBtn').style.display='none';
+  $('txAmount').value='';$('txNote').value='';$('txGST').value='';$('txDeductible').checked=false;$('txReceipt').value='';$('receiptStatus').textContent='';setTxType('expense');$('txDate').value=localDate();
+}
+async function saveTx(){
+  const a=parseFloat($('txAmount').value);if(!a||a<=0)return toast('请输入金额');
+  const arr=store.get('jlife_tx'); const id=editTxId||Date.now();
+  const obj={id,type:txType,amount:a,category:$('txCategory').value,account:$('txAccount').value,note:$('txNote').value.trim(),date:$('txDate').value||localDate(),deductible:$('txDeductible').checked,gst:parseFloat($('txGST').value)||0};
+  const idx=arr.findIndex(x=>x.id===id); if(idx>=0)arr[idx]=obj; else arr.unshift(obj); store.set('jlife_tx',arr);
+  const file=$('txReceipt').files[0]; if(file)await putAttachment(id,file);
+  toast(editTxId?'已修改':'已保存');cancelTxEdit();renderHome();go('home');
+}
+async function editTx(id){
+  const x=store.get('jlife_tx').find(v=>v.id===id);if(!x)return;
+  editTxId=id;setTxType(x.type);$('txAmount').value=x.amount;$('txCategory').value=x.category;$('txAccount').value=x.account;$('txNote').value=x.note||'';$('txDate').value=x.date;$('txDeductible').checked=!!x.deductible;$('txGST').value=x.gst||'';
+  const at=await getAttachment(id);$('receiptStatus').textContent=at?'当前已有附件：'+at.name:'当前没有附件';
+  $('txFormTitle').textContent='修改记录';$('saveTxBtn').textContent='保存修改';$('cancelEditBtn').style.display='block';go('add');
+}
+async function deleteTx(id){if(!confirm('确定删除这笔记录吗？'))return;store.set('jlife_tx',store.get('jlife_tx').filter(x=>x.id!==id));await deleteAttachment(id);renderHome();renderTax();toast('已删除')}
+async function viewReceipt(id){const a=await getAttachment(id);if(!a)return toast('这笔记录没有附件');const u=URL.createObjectURL(a.blob);window.open(u,'_blank');setTimeout(()=>URL.revokeObjectURL(u),60000)}
+
+function renderHome(){
+  const now=new Date(),month=localDate(now).slice(0,7),today=localDate(now),tx=store.get('jlife_tx');let inc=0,exp=0;
+  tx.filter(x=>x.date.startsWith(month)).forEach(x=>x.type==='income'?inc+=x.amount:exp+=x.amount);
+  $('mIncome').textContent=fmt(inc);$('mExpense').textContent=fmt(exp);$('mNet').textContent=fmt(inc-exp);$('mNet').className='value '+(inc-exp>=0?'good':'bad');
+  const td=tx.filter(x=>x.date===today).slice(0,12);
+  $('todayList').innerHTML=td.length?td.map(x=>`<div class="row"><div class="dot">${x.type==='income'?'💰':'💳'}</div><div class="grow"><div class="title">${esc(x.category)}${x.note?' · '+esc(x.note):''}</div><div class="sub">${esc(x.account)} ${x.deductible?'<span class="badge">可能可抵税</span>':''}</div><div class="inline-actions"><button class="mini" onclick="editTx(${x.id})">修改</button><button class="mini" onclick="viewReceipt(${x.id})">发票</button><button class="mini danger" onclick="deleteTx(${x.id})">删除</button></div></div><div class="amt ${x.type==='income'?'good':'bad'}">${x.type==='income'?'+':'-'}${fmt(x.amount)}</div></div>`).join(''):'<div class="empty">今天还没有记录</div>';
+  renderReminderPreview();
+}
+
+function saveLife(){
+  const title=$('lifeTitle').value.trim(),body=$('lifeBody').value.trim();if(!title&&!body)return toast('写点内容吧');
+  const arr=store.get('jlife_life'),id=editLifeId||Date.now(),obj={id,title:title||'生活记录',body,date:$('lifeDate').value||localDate()},idx=arr.findIndex(x=>x.id===id);
+  if(idx>=0)arr[idx]=obj;else arr.unshift(obj);store.set('jlife_life',arr);toast(editLifeId?'已修改':'已保存');cancelLifeEdit();renderLife();
+}
+function editLife(id){const x=store.get('jlife_life').find(v=>v.id===id);if(!x)return;editLifeId=id;$('lifeTitle').value=x.title;$('lifeBody').value=x.body;$('lifeDate').value=x.date;$('saveLifeBtn').textContent='保存修改';$('cancelLifeBtn').style.display='block';go('life')}
+function cancelLifeEdit(){editLifeId=null;$('lifeTitle').value='';$('lifeBody').value='';$('lifeDate').value=localDate();$('saveLifeBtn').textContent='保存生活记录';$('cancelLifeBtn').style.display='none'}
+function delLife(id){if(!confirm('确定删除这条生活记录吗？'))return;store.set('jlife_life',store.get('jlife_life').filter(x=>x.id!==id));renderLife()}
+function renderLife(){const a=store.get('jlife_life');$('lifeList').innerHTML=a.length?a.slice(0,50).map(x=>`<div class="row"><div class="dot">📖</div><div class="grow"><div class="title">${esc(x.title)}</div><div class="sub">${esc(x.date)}${x.body?' · '+esc(x.body.slice(0,70)):''}</div><div class="inline-actions"><button class="mini" onclick="editLife(${x.id})">修改</button><button class="mini danger" onclick="delLife(${x.id})">删除</button></div></div></div>`).join(''):'<div class="empty">还没有生活记录</div>'}
+
+function saveReminder(){
+  const title=$('remTitle').value.trim(),when=$('remWhen').value;if(!title||!when)return toast('请填写内容和时间');
+  const arr=store.get('jlife_rem'),id=editRemId||Date.now(),old=arr.find(x=>x.id===id),obj={id,title,when,done:old?.done||false},idx=arr.findIndex(x=>x.id===id);
+  if(idx>=0)arr[idx]=obj;else arr.push(obj);arr.sort((a,b)=>a.when.localeCompare(b.when));store.set('jlife_rem',arr);toast(editRemId?'已修改':'提醒已保存');cancelRemEdit();renderReminders();
+}
+function editRem(id){const x=store.get('jlife_rem').find(v=>v.id===id);if(!x)return;editRemId=id;$('remTitle').value=x.title;$('remWhen').value=x.when;$('saveRemBtn').textContent='保存修改';$('cancelRemBtn').style.display='block';go('reminders')}
+function cancelRemEdit(){editRemId=null;$('remTitle').value='';const r=new Date(Date.now()+3600000);$('remWhen').value=new Date(r.getTime()-r.getTimezoneOffset()*60000).toISOString().slice(0,16);$('saveRemBtn').textContent='保存提醒';$('cancelRemBtn').style.display='none'}
+function toggleRem(id){const a=store.get('jlife_rem'),x=a.find(v=>v.id===id);if(x)x.done=!x.done;store.set('jlife_rem',a);renderReminders()}
+function delRem(id){if(!confirm('确定删除这个提醒吗？'))return;store.set('jlife_rem',store.get('jlife_rem').filter(x=>x.id!==id));renderReminders()}
+function renderReminderPreview(){const a=store.get('jlife_rem').filter(x=>!x.done&&new Date(x.when)>=new Date()).slice(0,3);$('reminderPreview').innerHTML=a.length?a.map(x=>`<div class="row"><div class="dot">⏰</div><div class="grow"><div class="title">${esc(x.title)}</div><div class="sub">${new Date(x.when).toLocaleString('zh-CN',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})}</div></div></div>`).join(''):'<div class="empty">没有即将到来的提醒</div>'}
+function renderReminders(){const a=store.get('jlife_rem');$('reminderList').innerHTML=a.length?a.map(x=>`<div class="row"><div class="dot">${x.done?'✓':'⏰'}</div><div class="grow"><div class="title" style="${x.done?'text-decoration:line-through;opacity:.55':''}">${esc(x.title)}</div><div class="sub">${new Date(x.when).toLocaleString('zh-CN')}</div><div class="inline-actions"><button class="mini" onclick="toggleRem(${x.id})">${x.done?'恢复':'完成'}</button><button class="mini" onclick="editRem(${x.id})">修改</button><button class="mini" onclick="calendarRem(${x.id})">加入日历</button><button class="mini danger" onclick="delRem(${x.id})">删除</button></div></div></div>`).join(''):'<div class="empty">还没有提醒</div>';renderReminderPreview()}
+function calendarRem(id){const x=store.get('jlife_rem').find(v=>v.id===id);if(!x)return;const d=new Date(x.when),end=new Date(d.getTime()+30*60000),f=t=>t.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');const ics=`BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//J Life//CN\r\nBEGIN:VEVENT\r\nUID:${x.id}@jlife\r\nDTSTAMP:${f(new Date())}\r\nDTSTART:${f(d)}\r\nDTEND:${f(end)}\r\nSUMMARY:${x.title.replace(/\n/g,' ')}\r\nBEGIN:VALARM\r\nTRIGGER:-PT15M\r\nACTION:DISPLAY\r\nDESCRIPTION:${x.title.replace(/\n/g,' ')}\r\nEND:VALARM\r\nEND:VEVENT\r\nEND:VCALENDAR`;downloadBlob(ics,'text/calendar',`JLife-${x.id}.ics`)}
+
+function renderStats(){const m=$('statsMonth').value||localDate().slice(0,7);$('statsMonth').value=m;const a=store.get('jlife_tx').filter(x=>x.date.startsWith(m));let inc=0,exp=0,c={};a.forEach(x=>{if(x.type==='income')inc+=x.amount;else{exp+=x.amount;c[x.category]=(c[x.category]||0)+x.amount}});$('sIncome').textContent=fmt(inc);$('sExpense').textContent=fmt(exp);const max=Math.max(1,...Object.values(c));const rows=Object.entries(c).sort((a,b)=>b[1]-a[1]);$('categoryStats').innerHTML=rows.length?rows.map(([k,v])=>`<div style="margin-top:14px"><div style="display:flex;justify-content:space-between"><span>${esc(k)}</span><b>${fmt(v)}</b></div><div class="statbar"><i style="width:${Math.round(v/max*100)}%"></i></div></div>`).join(''):'<div class="empty">这个月还没有支出</div>'}
+
+function fyBounds(label){const y=parseInt(label.slice(0,4));return {start:`${y}-07-01`,end:`${y+1}-06-30`}}
+function initFY(){const now=new Date(),y=now.getMonth()>=6?now.getFullYear():now.getFullYear()-1;const opts=[];for(let i=0;i<6;i++){const s=y-i;opts.push(`${s}-${String(s+1).slice(-2)}`)}$('fySelect').innerHTML=opts.map(x=>`<option>${x}</option>`).join('')}
+async function renderTax(){
+  const label=$('fySelect').value,{start,end}=fyBounds(label),a=store.get('jlife_tx').filter(x=>x.date>=start&&x.date<=end);let inc=0,exp=0,ded=0,gst=0,missing=0;const rows=[];
+  for(const x of a){if(x.type==='income')inc+=x.amount;else exp+=x.amount;if(x.deductible){ded+=x.amount;gst+=Number(x.gst||0);const at=await getAttachment(x.id);if(!at)missing++;rows.push({...x,hasAttachment:!!at})}}
+  $('fyIncome').textContent=fmt(inc);$('fyExpense').textContent=fmt(exp);$('fyDeductible').textContent=fmt(ded);$('fyGST').textContent=fmt(gst);$('missingReceipts').textContent=`${missing} 笔`;
+  $('taxList').innerHTML=rows.length?rows.sort((a,b)=>b.date.localeCompare(a.date)).map(x=>`<div class="row"><div class="dot">🧾</div><div class="grow"><div class="title">${esc(x.category)} · ${fmt(x.amount)}</div><div class="sub">${x.date}${x.note?' · '+esc(x.note):''} · GST ${fmt(x.gst||0)} · ${x.hasAttachment?'有发票':'缺发票'}</div><div class="inline-actions"><button class="mini" onclick="editTx(${x.id})">修改</button><button class="mini" onclick="viewReceipt(${x.id})">查看发票</button></div></div></div>`).join(''):'<div class="empty">这个财政年度还没有标记为“可能可抵税”的记录</div>';
+}
+
+function exportCSV(){const a=store.get('jlife_tx');let s='date,type,category,account,amount,gst,deductible,note\n'+a.map(x=>[x.date,x.type,x.category,x.account,x.amount,x.gst||0,x.deductible?'yes':'no',`"${(x.note||'').replace(/"/g,'""')}"`].join(',')).join('\n');downloadBlob('\ufeff'+s,'text/csv;charset=utf-8','JLife-transactions.csv')}
+function exportTaxCSV(){const label=$('fySelect').value,{start,end}=fyBounds(label),a=store.get('jlife_tx').filter(x=>x.date>=start&&x.date<=end&&x.deductible);let s='date,category,account,amount,gst,note\n'+a.map(x=>[x.date,x.category,x.account,x.amount,x.gst||0,`"${(x.note||'').replace(/"/g,'""')}"`].join(',')).join('\n');downloadBlob('\ufeff'+s,'text/csv;charset=utf-8',`JLife-Tax-${label}.csv`)}
+
+function blobToDataURL(blob){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(blob)})}
+function dataURLToBlob(dataURL){const [meta,b64]=dataURL.split(',');const mime=(meta.match(/data:(.*?);base64/)||[])[1]||'application/octet-stream';const bin=atob(b64);const arr=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)arr[i]=bin.charCodeAt(i);return new Blob([arr],{type:mime})}
+async function exportJSON(){
+  toast('正在制作完整备份…');
+  const ats=await allAttachments(),attachments=[];
+  for(const a of ats)attachments.push({txId:a.txId,name:a.name,type:a.type,data:await blobToDataURL(a.blob)});
+  const data={version:2,transactions:store.get('jlife_tx'),life:store.get('jlife_life'),reminders:store.get('jlife_rem'),attachments,exportedAt:new Date().toISOString()};
+  downloadBlob(JSON.stringify(data),'application/json','JLife-full-backup.json');toast('完整备份已导出');
+}
+async function restoreJSON(ev){
+  const file=ev.target.files[0];if(!file)return;if(!confirm('恢复会覆盖当前 J Life 数据，确定继续吗？')){ev.target.value='';return}
+  try{
+    const data=JSON.parse(await file.text());if(!Array.isArray(data.transactions)||!Array.isArray(data.life)||!Array.isArray(data.reminders))throw new Error('格式不正确');
+    store.set('jlife_tx',data.transactions);store.set('jlife_life',data.life);store.set('jlife_rem',data.reminders);await clearAttachments();
+    for(const a of (data.attachments||[])){const b=dataURLToBlob(a.data);await putAttachment(a.txId,new File([b],a.name||'attachment',{type:a.type||b.type}))}
+    toast('恢复完成');renderHome();renderTax();
+  }catch(e){alert('恢复失败：'+e.message)}finally{ev.target.value=''}
+}
+function downloadBlob(content,type,name){const b=new Blob([content],{type}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
+async function clearAll(){if(confirm('确定清空 J Life 的全部数据和发票吗？此操作不能撤销。')){['jlife_tx','jlife_life','jlife_rem'].forEach(k=>localStorage.removeItem(k));await clearAttachments();renderHome();renderTax();toast('已清空')}}
+
+$('txDate').value=localDate();$('lifeDate').value=localDate();$('statsMonth').value=localDate().slice(0,7);$('todayText').textContent=new Date().toLocaleDateString('zh-CN',{weekday:'long',month:'long',day:'numeric'});cancelRemEdit();initFY();renderHome();
 </script>
-</body></html>
+</body>
+</html>
