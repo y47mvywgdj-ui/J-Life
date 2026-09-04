@@ -8,6 +8,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="J Life" />
   <title>J Life</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     :root{--bg:#f6f7fb;--card:#fff;--ink:#111827;--muted:#6b7280;--line:#e5e7eb;--good:#15803d;--bad:#b91c1c;--blue:#2563eb;--soft:#eef2ff}
     *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang SC","Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink)}
@@ -17,11 +18,11 @@
     .section-title{display:flex;align-items:center;justify-content:space-between;margin:18px 2px 10px}.section-title h2{font-size:17px;margin:0}.linkbtn{border:0;background:transparent;color:#334155;font-weight:700}
     .quick{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.q{border:0;background:var(--card);border-radius:18px;padding:14px 6px;box-shadow:0 5px 18px rgba(15,23,42,.05);font-weight:700}.q span{display:block;font-size:22px;margin-bottom:6px}
     .row{display:flex;align-items:flex-start;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}.row:last-child{border-bottom:0}.dot{width:38px;height:38px;border-radius:12px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:18px;flex:0 0 auto}.grow{flex:1;min-width:0}.title{font-weight:700}.sub{color:var(--muted);font-size:12px;margin-top:3px;line-height:1.45}.amt{font-weight:800;white-space:nowrap}.empty{color:var(--muted);text-align:center;padding:20px 8px}
-    nav{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(560px,100%);background:rgba(255,255,255,.95);backdrop-filter:blur(18px);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(7,1fr);padding:8px 4px calc(8px + env(safe-area-inset-bottom));z-index:10}.navbtn{border:0;background:transparent;padding:7px 0;color:#64748b;font-size:9px}.navbtn b{display:block;font-size:18px;margin-bottom:3px}.navbtn.active{color:#111827;font-weight:800}
+    nav{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(560px,100%);background:rgba(255,255,255,.95);backdrop-filter:blur(18px);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(8,1fr);padding:8px 3px calc(8px + env(safe-area-inset-bottom));z-index:10}.navbtn{border:0;background:transparent;padding:7px 0;color:#64748b;font-size:9px}.navbtn b{display:block;font-size:18px;margin-bottom:3px}.navbtn.active{color:#111827;font-weight:800}
     .page{display:none}.page.active{display:block}.form-card{background:#fff;border-radius:20px;padding:16px;box-shadow:0 8px 24px rgba(15,23,42,.06)}label{display:block;font-size:13px;color:#475569;margin:12px 0 6px}input,select,textarea{width:100%;border:1px solid #dbe0e7;border-radius:14px;padding:13px 14px;font-size:16px;background:#fff}textarea{min-height:100px;resize:vertical}.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}.seg button{padding:12px;border-radius:14px;border:1px solid #dbe0e7;background:#fff;font-weight:800}.seg button.on{background:#111827;color:#fff;border-color:#111827}
     .primary{width:100%;border:0;background:#111827;color:#fff;border-radius:16px;padding:14px;margin-top:16px;font-size:16px;font-weight:800}.secondary{width:100%;border:1px solid #dbe0e7;background:#fff;border-radius:16px;padding:13px;margin-top:10px;font-weight:800}.danger{color:#b91c1c}.warn{background:#fff7ed;border:1px solid #fed7aa}
     .small{font-size:12px;color:var(--muted);line-height:1.55}.inline-actions{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}.mini{border:1px solid #dbe0e7;background:#fff;border-radius:12px;padding:7px 9px;font-weight:700;font-size:12px}.monthpick{display:flex;gap:8px;align-items:center}.monthpick input,.monthpick select{width:auto;flex:1}.check{display:flex;align-items:center;gap:10px;margin-top:14px}.check input{width:auto}.badge{display:inline-block;border-radius:999px;padding:3px 7px;font-size:11px;background:#eef2ff;color:#334155;margin-right:4px}.toast{position:fixed;left:50%;bottom:104px;transform:translateX(-50%);background:#111827;color:#fff;padding:10px 14px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:.2s;z-index:20}.toast.show{opacity:1}
-    .statbar{height:12px;border-radius:999px;background:#eef2f7;overflow:hidden;margin-top:8px}.statbar i{display:block;height:100%;background:#111827;border-radius:999px}.import-drop{border:2px dashed #cbd5e1;border-radius:18px;padding:22px 14px;text-align:center;background:#f8fafc}.import-drop input{margin-top:12px}.toolbar{display:grid;grid-template-columns:1fr 1fr;gap:8px}.toolbar .secondary{margin-top:0}.preview-head{display:flex;align-items:center;gap:8px}.preview-head input,.import-check{width:20px;height:20px;flex:0 0 auto}.import-row{align-items:center}.import-row.duplicate{opacity:.55}.import-row select{padding:8px;font-size:13px;border-radius:10px}.status-private{background:#f1f5f9}.status-possible{background:#fff7ed;color:#9a3412}.status-deductible{background:#ecfdf5;color:#166534}.history-total{font-weight:800;color:#334155}.file-note{margin-top:10px;color:#64748b;font-size:12px;line-height:1.5}
+    .statbar{height:12px;border-radius:999px;background:#eef2f7;overflow:hidden;margin-top:8px}.statbar i{display:block;height:100%;background:#111827;border-radius:999px}.import-drop{border:2px dashed #cbd5e1;border-radius:18px;padding:22px 14px;text-align:center;background:#f8fafc}.import-drop input{margin-top:12px}.toolbar{display:grid;grid-template-columns:1fr 1fr;gap:8px}.toolbar .secondary{margin-top:0}.preview-head{display:flex;align-items:center;gap:8px}.preview-head input,.import-check{width:20px;height:20px;flex:0 0 auto}.import-row{align-items:center}.import-row.duplicate{opacity:.55}.import-row select{padding:8px;font-size:13px;border-radius:10px}.status-private{background:#f1f5f9}.status-possible{background:#fff7ed;color:#9a3412}.status-deductible{background:#ecfdf5;color:#166534}.pending{background:#fff7ed;color:#9a3412}.paid{background:#ecfdf5;color:#166534}.history-total{font-weight:800;color:#334155}.file-note{margin-top:10px;color:#64748b;font-size:12px;line-height:1.5}
   </style>
 </head>
 <body>
@@ -33,6 +34,7 @@
     <div class="section-title"><h2>快速记录</h2></div>
     <div class="quick"><button class="q" onclick="presetTx('expense','餐饮')"><span>🍜</span>吃饭</button><button class="q" onclick="presetTx('expense','购物')"><span>🛍️</span>购物</button><button class="q" onclick="presetTx('income','收入')"><span>💰</span>收入</button><button class="q" onclick="go('life')"><span>📖</span>生活</button></div>
     <div class="section-title"><h2>今天的记录</h2><button class="linkbtn" onclick="go('stats')">查看统计</button></div><div class="card" id="todayList"></div>
+    <div class="section-title"><h2>待付款</h2></div><div class="card" id="pendingBills"></div>
     <div class="section-title"><h2>近期提醒</h2></div><div class="card" id="reminderPreview"></div>
   </section>
 
@@ -43,12 +45,16 @@
       <label>金额（AUD）</label><input id="txAmount" inputmode="decimal" placeholder="0.00" />
       <label>分类</label><select id="txCategory"><option>餐饮</option><option>购物</option><option>家庭</option><option>汽车</option><option>旅行</option><option>公司</option><option>宝宝</option><option>办公用品</option><option>电话网络</option><option>会计法律</option><option>收入</option><option>其他</option></select>
       <label>账户</label><select id="txAccount"><option>个人</option><option>家庭</option><option>公司</option><option>现金</option></select>
+      <label>项目</label><input id="txProject" placeholder="例如：Woolworths / 国际出差支出" />
+      <label>消费地点</label><select id="txLocation"><option value="sydney">悉尼本地</option><option value="domestic-travel">澳洲境内出差（非悉尼）</option><option value="international">海外出差</option></select>
       <label>备注</label><input id="txNote" placeholder="例如：Costco 购物 / 公司油费" />
       <label>日期</label><input id="txDate" type="date" />
       <label>税务用途</label><select id="txTaxStatus"><option value="private">私人 / Private</option><option value="possible">可能可抵税 / Possible deductible</option><option value="deductible">可抵税 / Deductible</option></select>
       <label>GST 金额（可选）</label><input id="txGST" inputmode="decimal" placeholder="0.00" />
-      <label>发票 / 账单 / 收据（图片或 PDF）</label><input id="txReceipt" type="file" accept="image/*,application/pdf" />
+      <label>发票 / 账单 / 收据（图片或 PDF）</label><input id="txReceipt" type="file" accept="image/*,application/pdf,text/plain" onchange="detectBillDueDate(event)" />
       <div id="receiptStatus" class="small"></div>
+      <label>付款到期日（识别后请确认）</label><input id="txDueDate" type="date" />
+      <label>提前提醒</label><select id="txReminderDays"><option value="1">提前 1 天</option><option value="3" selected>提前 3 天</option><option value="7">提前 7 天</option><option value="14">提前 14 天</option></select>
       <button class="primary" id="saveTxBtn" onclick="saveTx()">保存记录</button>
       <button class="secondary" id="cancelEditBtn" style="display:none" onclick="cancelTxEdit()">取消修改</button>
     </div>
@@ -73,6 +79,24 @@
     <div class="card monthpick"><input id="statsMonth" type="month" onchange="renderStats()"></div>
     <div class="grid2"><div class="card metric"><div class="label">收入</div><div id="sIncome" class="value good">$0</div></div><div class="card metric"><div class="label">支出</div><div id="sExpense" class="value bad">$0</div></div></div>
     <div class="card"><div class="title">支出分类</div><div id="categoryStats"></div></div>
+    <div class="card"><div class="title">支出项目</div><div id="projectStats"></div></div>
+  </section>
+
+  <section id="bills" class="page">
+    <div class="top"><div class="brand"><h1>账单</h1><p>上传、拍照和付款提醒</p></div></div>
+    <div class="grid2"><button class="q" onclick="$(`billUpload`).click()"><span>⇧</span>上传账单</button><button class="q" onclick="$(`billCamera`).click()"><span>📷</span>拍照账单</button></div>
+    <div class="card small" style="margin-top:12px">首次识别需要联网加载 OCR 组件；账单照片在本机处理，不上传到 J Life 服务器。识别完成后请确认金额和到期日。</div>
+    <input id="billUpload" type="file" accept="image/*,application/pdf,text/plain" style="display:none" onchange="prepareBill(event,'upload')">
+    <input id="billCamera" type="file" accept="image/*" capture="environment" style="display:none" onchange="prepareBill(event,'camera')">
+    <div id="billDraft" class="form-card" style="display:none;margin-top:12px">
+      <div class="title">确认账单资料</div><div id="billScanStatus" class="small"></div>
+      <label>账单名称</label><input id="billTitle" placeholder="例如：电费账单">
+      <label>金额（AUD，可选）</label><input id="billAmount" inputmode="decimal" placeholder="0.00">
+      <label>付款到期日</label><input id="billDueDate" type="date">
+      <label>提前提醒</label><select id="billReminderDays"><option value="1">提前 1 天</option><option value="3" selected>提前 3 天</option><option value="7">提前 7 天</option><option value="14">提前 14 天</option></select>
+      <button class="primary" onclick="saveBill()">保存为 Pending</button><button class="secondary" onclick="cancelBillDraft()">取消</button>
+    </div>
+    <div class="section-title"><h2>Pending</h2></div><div class="card" id="billList"></div>
   </section>
 
   <section id="bank" class="page">
@@ -85,7 +109,7 @@
       <button class="primary" onclick="confirmBankImport()">确认导入已选交易</button>
       <button class="secondary" onclick="clearImportPreview()">取消本次导入</button>
     </div>
-    <div class="section-title"><h2>导入历史</h2></div><div class="card" id="importHistory"></div>
+    <div class="section-title"><h2>导入历史</h2></div><div class="card"><button class="secondary" style="margin-top:0" onclick="reclassifyLatestImport()">重新自动分类最近一次导入</button><button class="secondary" onclick="regroupLatestImport()">重新整理最近一次导入的项目</button><button class="secondary" onclick="retagLatestTravelImport()">重新识别非悉尼税务标签</button><p class="small">同一商户会归入同名项目；外币交易归入“国际出差支出”。非悉尼支出会标为“可能可抵税”，请按实际工作用途确认。</p></div><div class="card" id="importHistory"></div>
   </section>
 
   <section id="tax" class="page">
@@ -105,6 +129,7 @@
 
   <section id="me" class="page">
     <div class="top"><div class="brand"><h1>我的</h1><p>J Life v2</p></div></div>
+    <div class="card"><div class="title">加密自动同步</div><p id="cloudStatus" class="small">尚未登录</p><div id="cloudLogin"><label>邮箱</label><input id="cloudEmail" type="email" autocomplete="email" placeholder="你的邮箱"><label>登录密码</label><input id="cloudPassword" type="password" autocomplete="current-password" placeholder="至少 8 位"><label>数据加密密码</label><input id="cloudPassphrase" type="password" autocomplete="off" placeholder="用于加密记录，请务必记住"><button class="primary" onclick="cloudSignIn()">登录并同步</button><button class="secondary" onclick="cloudSignUp()">首次使用：创建账号</button></div><div id="cloudActions" style="display:none"><button class="primary" onclick="cloudSyncNow()">立即同步</button><button class="secondary" onclick="cloudDownload()">从云端恢复到此设备</button><button class="secondary" onclick="cloudSignOut()">退出登录</button></div><p class="small">记录会在设备上加密后上传。加密密码不会发送到 Supabase；遗忘后无法解密云端数据。当前版本暂不同步大型账单附件。</p></div>
     <div class="card"><div class="title">备份与恢复</div><p class="small">完整备份会包含收支、生活记录、提醒，以及已保存的发票/账单文件。</p><button class="secondary" onclick="exportCSV()">导出收支 CSV</button><button class="secondary" onclick="exportJSON()">导出完整备份</button><button class="secondary" onclick="$('restoreInput').click()">从完整备份恢复</button><input id="restoreInput" type="file" accept="application/json" style="display:none" onchange="restoreJSON(event)"><button class="secondary danger" onclick="clearAll()">清空全部数据</button></div>
     <div class="card"><div class="title">隐私</div><p class="small">程序代码可以公开，但你输入的记录与附件只保存在当前设备的浏览器存储中，不会自动上传到 GitHub。</p></div>
   </section>
@@ -115,6 +140,7 @@
   <button class="navbtn" data-page="add" onclick="newTx()"><b>＋</b>记账</button>
   <button class="navbtn" data-page="life" onclick="go('life')"><b>◫</b>生活</button>
   <button class="navbtn" data-page="reminders" onclick="go('reminders')"><b>◉</b>提醒</button>
+  <button class="navbtn" data-page="bills" onclick="go('bills')"><b>▤</b>账单</button>
   <button class="navbtn" data-page="bank" onclick="go('bank')"><b>⇩</b>导入</button>
   <button class="navbtn" data-page="tax" onclick="go('tax')"><b>🧾</b>税务</button>
   <button class="navbtn" data-page="me" onclick="go('me')"><b>⚙︎</b>我的</button>
@@ -123,9 +149,28 @@
 
 <script>
 const $=id=>document.getElementById(id);
-const store={get:k=>JSON.parse(localStorage.getItem(k)||'[]'),set:(k,v)=>localStorage.setItem(k,JSON.stringify(v))};
+const store={get:k=>JSON.parse(localStorage.getItem(k)||'[]'),set:(k,v)=>{localStorage.setItem(k,JSON.stringify(v));if(!cloudSuppress)scheduleCloudSync()}};
 const fmt=n=>new Intl.NumberFormat('en-AU',{style:'currency',currency:'AUD',maximumFractionDigits:2}).format(Number(n||0));
 const categories=['Groceries','Transport','Fuel','Dining','Shopping','Household','Travel','Business','Baby','Office supplies','Phone & Internet','Accounting & Legal','Income','Other'];
+const SUPABASE_URL='https://xbwzapbbjeazwhbyqjzf.supabase.co';
+const SUPABASE_KEY='sb_publishable_SMc4LYgdIiEPd32QQDJsIg_6i11zZ2l';
+const cloud=window.supabase?.createClient(SUPABASE_URL,SUPABASE_KEY),cloudKeys=['jlife_tx','jlife_life','jlife_rem','jlife_bills','jlife_rules','jlife_import_history'];
+let cloudSuppress=false,cloudReady=false,cloudTimer=null,cloudUser=null,cloudChannel=null;
+const bytesToB64=b=>btoa(String.fromCharCode(...b)),b64ToBytes=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function cloudKey(pass,salt){const base=await crypto.subtle.importKey('raw',new TextEncoder().encode(pass),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:250000,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
+async function encryptCloud(data,pass){const salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12)),key=await cloudKey(pass,salt),encrypted=await crypto.subtle.encrypt({name:'AES-GCM',iv},key,new TextEncoder().encode(JSON.stringify(data)));return{encrypted_payload:bytesToB64(new Uint8Array(encrypted)),salt:bytesToB64(salt),iv:bytesToB64(iv)}}
+async function decryptCloud(row,pass){const salt=b64ToBytes(row.salt),iv=b64ToBytes(row.iv),key=await cloudKey(pass,salt),plain=await crypto.subtle.decrypt({name:'AES-GCM',iv},key,b64ToBytes(row.encrypted_payload));return JSON.parse(new TextDecoder().decode(plain))}
+function cloudPass(){return sessionStorage.getItem('jlife_cloud_pass')||''}
+function cloudPayload(){const data={version:4,updatedAt:new Date().toISOString()};cloudKeys.forEach(k=>data[k]=store.get(k));return data}
+function setCloudUI(text,logged=false){$('cloudStatus').textContent=text;$('cloudLogin').style.display=logged?'none':'block';$('cloudActions').style.display=logged?'block':'none'}
+function scheduleCloudSync(){if(!cloudReady||!cloudUser||cloudSuppress)return;clearTimeout(cloudTimer);cloudTimer=setTimeout(()=>cloudSyncNow(true),1200)}
+async function cloudSignUp(){const email=$('cloudEmail').value.trim(),password=$('cloudPassword').value,pass=$('cloudPassphrase').value;if(!email||password.length<8||pass.length<8)return toast('登录密码和加密密码至少 8 位');setCloudUI('正在创建账号…');const{data,error}=await cloud.auth.signUp({email,password});if(error){setCloudUI('创建失败：'+error.message);return}sessionStorage.setItem('jlife_cloud_pass',pass);if(data.session){await activateCloud(data.user);await cloudSyncNow()}else setCloudUI('请到邮箱确认账号，然后返回登录')}
+async function cloudSignIn(){const email=$('cloudEmail').value.trim(),password=$('cloudPassword').value,pass=$('cloudPassphrase').value;if(!email||!password||pass.length<8)return toast('请填写邮箱、登录密码和至少 8 位加密密码');setCloudUI('正在登录…');const{data,error}=await cloud.auth.signInWithPassword({email,password});if(error){setCloudUI('登录失败：'+error.message);return}sessionStorage.setItem('jlife_cloud_pass',pass);await activateCloud(data.user);setCloudUI('已登录。请选择立即同步，或从云端恢复。',true)}
+async function activateCloud(user){cloudUser=user;cloudReady=false;if(cloudChannel)await cloud.removeChannel(cloudChannel);cloudChannel=cloud.channel('jlife-sync-'+user.id).on('postgres_changes',{event:'UPDATE',schema:'public',table:'jlife_sync',filter:'user_id=eq.'+user.id},()=>{if(cloudReady)cloudDownload(true)}).subscribe()}
+async function cloudSyncNow(silent=false){if(!cloudUser){if(!silent)toast('请先登录');return}const pass=cloudPass();if(!pass)return setCloudUI('请重新登录并输入加密密码');try{if(!silent)setCloudUI('正在加密并同步…',true);const enc=await encryptCloud(cloudPayload(),pass),{data:old}=await cloud.from('jlife_sync').select('revision').eq('user_id',cloudUser.id).maybeSingle();const{error}=await cloud.from('jlife_sync').upsert({user_id:cloudUser.id,...enc,revision:(old?.revision||0)+1,updated_at:new Date().toISOString()});if(error)throw error;cloudReady=true;setCloudUI('同步完成 · '+new Date().toLocaleTimeString('zh-CN'),true)}catch(e){setCloudUI('同步失败：'+e.message,true)}}
+async function cloudDownload(silent=false){if(!cloudUser)return toast('请先登录');try{if(!silent)setCloudUI('正在下载并解密…',true);const{data,error}=await cloud.from('jlife_sync').select('*').eq('user_id',cloudUser.id).maybeSingle();if(error)throw error;if(!data){toast('云端还没有数据');return}const payload=await decryptCloud(data,cloudPass());cloudSuppress=true;cloudKeys.forEach(k=>store.set(k,payload[k]||[]));cloudSuppress=false;cloudReady=true;renderHome();renderLife();renderReminders();renderBills();renderStats();renderTax();renderImportHistory();setCloudUI('云端数据已恢复 · '+new Date(data.updated_at).toLocaleString('zh-CN'),true)}catch(e){cloudSuppress=false;setCloudUI('无法解密：请检查加密密码',true)}}
+async function cloudSignOut(){cloudReady=false;cloudUser=null;sessionStorage.removeItem('jlife_cloud_pass');if(cloudChannel){await cloud.removeChannel(cloudChannel);cloudChannel=null}await cloud.auth.signOut();setCloudUI('已退出登录')}
+async function initCloud(){if(!cloud)return setCloudUI('同步组件加载失败');const{data}=await cloud.auth.getSession();if(data.session){cloudUser=data.session.user;setCloudUI('已登录，请输入加密密码后重新登录以解锁同步。');await cloud.auth.signOut()}}
 function localDate(d=new Date()){const z=new Date(d.getTime()-d.getTimezoneOffset()*60000);return z.toISOString().slice(0,10)}
 function toast(t){$('toast').textContent=t;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),1600)}
 function esc(s=''){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
@@ -149,7 +194,7 @@ async function clearAttachments(){const d=await db();return new Promise((res,rej
 function go(p){
   document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===p));
   document.querySelectorAll('.navbtn').forEach(x=>x.classList.toggle('active',x.dataset.page===p));
-  if(p==='home')renderHome();if(p==='life')renderLife();if(p==='reminders')renderReminders();if(p==='stats')renderStats();if(p==='tax')renderTax();if(p==='bank')renderImportHistory();
+  if(p==='home')renderHome();if(p==='life')renderLife();if(p==='reminders')renderReminders();if(p==='stats')renderStats();if(p==='tax')renderTax();if(p==='bank')renderImportHistory();if(p==='bills')renderBills();
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
@@ -157,25 +202,46 @@ let txType='expense', editTxId=null, editLifeId=null, editRemId=null;
 function setTxType(t){txType=t;$('expenseBtn').classList.toggle('on',t==='expense');$('incomeBtn').classList.toggle('on',t==='income')}
 function newTx(){cancelTxEdit();go('add')}
 function presetTx(t,c){newTx();setTxType(t);$('txCategory').value=c;$('txAmount').focus()}
+function extractDueDate(text=''){const s=String(text).replace(/_+/g,' ');const patterns=[/(?:due\s*date|payment\s*due|pay\s*by|到期日|付款日期)\s*[:：-]?\s*(\d{1,2}[\/.-]\d{1,2}[\/.-]\d{2,4})/i,/(?:due\s*date|payment\s*due|pay\s*by)\s*[:：-]?\s*(\d{1,2}\s+[A-Za-z]{3,9}\s+\d{4})/i,/(?:due\s*date|payment\s*due|pay\s*by)\s*[:：-]?\s*([A-Za-z]{3,9}\s+\d{1,2},?\s+\d{4})/i,/(?:due|payby|到期)\s*[:：-]?\s*(\d{4}[\/.-]\d{1,2}[\/.-]\d{1,2})/i];for(const p of patterns){const m=s.match(p);if(m){const d=parseDate(m[1]);if(d)return d}}return''}
+function extractBillAmount(text=''){const s=String(text).replace(/,/g,'');const patterns=[/(?:amount\s*due|total\s*due|balance\s*due|please\s*pay|amount\s*payable)\s*[:：]?\s*(?:AUD\s*)?\$?\s*(\d+(?:\.\d{2})?)/i,/(?:total|balance)\s*[:：]?\s*(?:AUD\s*)?\$\s*(\d+(?:\.\d{2})?)/i];for(const p of patterns){const m=s.match(p);if(m)return parseFloat(m[1])||0}return 0}
+function extractBillTitle(text='',fallback='账单'){const skip=/(invoice|tax invoice|statement|receipt|account|date|amount|total|due|abn|page|www\.|http)/i;const line=String(text).split(/\r?\n/).map(x=>x.replace(/[^\p{L}\p{N}&.' -]/gu,' ').replace(/\s+/g,' ').trim()).find(x=>x.length>=3&&x.length<=60&&!skip.test(x)&&/[A-Za-z\p{L}]/u.test(x));return line||fallback}
+let ocrLoader;
+function loadOCR(){if(window.Tesseract)return Promise.resolve();if(ocrLoader)return ocrLoader;ocrLoader=new Promise((resolve,reject)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/tesseract.js@7/dist/tesseract.min.js';s.onload=resolve;s.onerror=()=>reject(new Error('OCR 组件加载失败'));document.head.appendChild(s)});return ocrLoader}
+async function recognizeBillPhoto(file){await loadOCR();const worker=await Tesseract.createWorker('eng',1,{logger:m=>{if(m.status==='recognizing text')$('billScanStatus').textContent=`正在识别账单… ${Math.round((m.progress||0)*100)}%`}});try{const result=await worker.recognize(file);return result.data.text||''}finally{await worker.terminate()}}
+async function detectBillDueDate(ev){const file=ev.target.files[0];if(!file)return;let due=extractDueDate(file.name),source='文件名';if(!due&&(file.type.startsWith('text/')||file.type==='application/pdf')){try{const text=(await file.text()).slice(0,500000);due=extractDueDate(text);source='账单内容'}catch(e){}}
+  if(due){$('txDueDate').value=due;$('receiptStatus').textContent=`已从${source}识别付款日期：${due}。请确认后保存。`}else $('receiptStatus').textContent='未能可靠识别付款日期，请在下方选择到期日后保存。'
+}
+let billAttachment=null;
+async function prepareBill(ev,source){const file=ev.target.files[0];if(!file)return;billAttachment=file;const fallback=file.name.replace(/\.[^.]+$/,'').replace(/[_-]+/g,' ');let due=extractDueDate(file.name),from='文件名',text='';$('billTitle').value=fallback;$('billAmount').value='';$('billDueDate').value=due;$('billReminderDays').value='3';$('billDraft').style.display='block';$('billScanStatus').textContent=file.type.startsWith('image/')?'正在准备 OCR…':'正在读取账单…';window.scrollTo({top:0,behavior:'smooth'});ev.target.value='';try{if(file.type.startsWith('image/')){text=await recognizeBillPhoto(file);from='照片 OCR'}else if(file.type.startsWith('text/')||file.type==='application/pdf'){text=(await file.text()).slice(0,500000);from='账单内容'}if(text){due=extractDueDate(text)||due;const amount=extractBillAmount(text),title=extractBillTitle(text,fallback);$('billTitle').value=title;if(amount)$('billAmount').value=amount.toFixed(2);if(due)$('billDueDate').value=due;$('billScanStatus').textContent=`${from}完成：${title}${amount?' · '+fmt(amount):''}${due?' · 到期 '+due:' · 未识别到期日'}。请确认。`}else $('billScanStatus').textContent=due?`已从文件名识别到期日 ${due}，请确认。`:'未能读取账单文字，请手动确认资料。'}catch(e){$('billScanStatus').textContent='OCR 未完成（可能是首次组件加载失败或网络中断），请手动确认资料。'} }
+function cancelBillDraft(){billAttachment=null;$('billDraft').style.display='none'}
+function syncStandaloneBillReminder(bill){let rem=store.get('jlife_rem').filter(x=>x.billRecordId!==bill.id);if(bill.status==='pending'){const notify=new Date(bill.dueDate+'T09:00:00');notify.setDate(notify.getDate()-(bill.reminderDays||3));rem.push({id:-(bill.id+5000000000000),billRecordId:bill.id,title:`账单待付款：${bill.title}${bill.amount?' '+fmt(bill.amount):''}`,when:new Date(notify.getTime()-notify.getTimezoneOffset()*60000).toISOString().slice(0,16),dueDate:bill.dueDate,done:false});rem.sort((a,b)=>a.when.localeCompare(b.when))}store.set('jlife_rem',rem)}
+async function saveBill(){const title=$('billTitle').value.trim(),dueDate=$('billDueDate').value;if(!title)return toast('请输入账单名称');if(!dueDate)return toast('请确认付款到期日');const id=Date.now(),bill={id,title,amount:parseFloat($('billAmount').value)||0,dueDate,reminderDays:parseInt($('billReminderDays').value)||3,status:'pending',createdAt:new Date().toISOString(),fileName:billAttachment?.name||''};const bills=store.get('jlife_bills');bills.unshift(bill);store.set('jlife_bills',bills);if(billAttachment)await putAttachment('bill-'+id,billAttachment);syncStandaloneBillReminder(bill);cancelBillDraft();renderBills();renderHome();toast('账单已保存为 Pending')}
+function billDaysLabel(dueDate){const days=Math.ceil((new Date(dueDate+'T23:59:59')-new Date())/86400000);return days<0?`逾期 ${Math.abs(days)} 天`:days===0?'今天到期':`${days} 天后到期`}
+function renderBills(){const bills=store.get('jlife_bills');$('billList').innerHTML=bills.length?bills.map(x=>`<div class="row"><div class="dot">🧾</div><div class="grow"><div class="title">${esc(x.title)} <span class="badge ${x.status==='paid'?'paid':'pending'}">${x.status==='paid'?'Paid':'Pending'}</span></div><div class="sub">${x.amount?fmt(x.amount)+' · ':''}${x.dueDate} · ${x.status==='paid'?'已付款':billDaysLabel(x.dueDate)}</div><div class="inline-actions">${x.status==='pending'?`<button class="mini" onclick="markStandaloneBillPaid(${x.id})">标记已付款</button>`:''}<button class="mini" onclick="viewReceipt('bill-${x.id}')">查看账单</button><button class="mini danger" onclick="deleteBill(${x.id})">删除</button></div></div></div>`).join(''):'<div class="empty">还没有账单</div>'}
+function markStandaloneBillPaid(id){const bills=store.get('jlife_bills'),x=bills.find(v=>v.id===id);if(!x)return;x.status='paid';store.set('jlife_bills',bills);syncStandaloneBillReminder(x);renderBills();renderHome();renderReminders();toast('已标记为付款完成')}
+async function deleteBill(id){if(!confirm('确定删除这张账单吗？'))return;store.set('jlife_bills',store.get('jlife_bills').filter(x=>x.id!==id));store.set('jlife_rem',store.get('jlife_rem').filter(x=>x.billRecordId!==id));await deleteAttachment('bill-'+id);renderBills();renderHome();toast('账单已删除')}
 function cancelTxEdit(){
   editTxId=null;$('txFormTitle').textContent='记一笔';$('saveTxBtn').textContent='保存记录';$('cancelEditBtn').style.display='none';
-  $('txAmount').value='';$('txNote').value='';$('txGST').value='';$('txTaxStatus').value='private';$('txReceipt').value='';$('receiptStatus').textContent='';setTxType('expense');$('txDate').value=localDate();
+  $('txAmount').value='';$('txProject').value='';$('txLocation').value='sydney';$('txNote').value='';$('txGST').value='';$('txTaxStatus').value='private';$('txDueDate').value='';$('txReminderDays').value='3';$('txReceipt').value='';$('receiptStatus').textContent='';setTxType('expense');$('txDate').value=localDate();
 }
 async function saveTx(){
   const a=parseFloat($('txAmount').value);if(!a||a<=0)return toast('请输入金额');
   const arr=store.get('jlife_tx'); const id=editTxId||Date.now();
-  const taxStatus=$('txTaxStatus').value;const obj={id,type:txType,amount:a,category:$('txCategory').value,account:$('txAccount').value,note:$('txNote').value.trim(),date:$('txDate').value||localDate(),taxStatus,deductible:taxStatus!=='private',gst:parseFloat($('txGST').value)||0};
+  const date=$('txDate').value||localDate(),location=$('txLocation').value;let taxStatus=$('txTaxStatus').value;if(txType==='expense'&&location!=='sydney'&&taxStatus==='private')taxStatus='possible';
+  if(!editTxId){const near=arr.filter(x=>x.importBatchId&&Number(x.amount).toFixed(2)===a.toFixed(2)&&Math.abs(new Date(x.date)-new Date(date))<=3*86400000);if(near.length&&!confirm(`发现 ${near.length} 笔银行导入记录金额同为 ${fmt(a)}，日期相近。\n\n仍要保存这笔手动记录吗？`))return}
+  const dueDate=$('txDueDate').value,reminderDays=parseInt($('txReminderDays').value)||3;const old=arr.find(x=>x.id===id);const obj={id,type:txType,amount:a,category:$('txCategory').value,account:$('txAccount').value,project:$('txProject').value.trim()||(location==='international'?'国际出差支出':''),location,note:$('txNote').value.trim(),date,taxStatus,deductible:taxStatus!=='private',gst:parseFloat($('txGST').value)||0,dueDate,reminderDays,paymentStatus:dueDate?(old?.paymentStatus==='paid'?'paid':'pending'):''};
   const idx=arr.findIndex(x=>x.id===id); if(idx>=0)arr[idx]=obj; else arr.unshift(obj); store.set('jlife_tx',arr);
   const file=$('txReceipt').files[0]; if(file)await putAttachment(id,file);
+  syncBillReminder(obj);
   toast(editTxId?'已修改':'已保存');cancelTxEdit();renderHome();go('home');
 }
 async function editTx(id){
   const x=store.get('jlife_tx').find(v=>v.id===id);if(!x)return;
-  editTxId=id;setTxType(x.type);$('txAmount').value=x.amount;$('txCategory').value=x.category;$('txAccount').value=x.account;$('txNote').value=x.note||'';$('txDate').value=x.date;$('txTaxStatus').value=x.taxStatus||(x.deductible?'possible':'private');$('txGST').value=x.gst||'';
+  editTxId=id;setTxType(x.type);$('txAmount').value=x.amount;$('txCategory').value=x.category;$('txAccount').value=x.account;$('txProject').value=x.project||'';$('txLocation').value=x.location||inferTravelLocation(x.note||'',x.currency||'');$('txNote').value=x.note||'';$('txDate').value=x.date;$('txTaxStatus').value=x.taxStatus||(x.deductible?'possible':'private');$('txGST').value=x.gst||'';$('txDueDate').value=x.dueDate||'';$('txReminderDays').value=String(x.reminderDays||3);
   const at=await getAttachment(id);$('receiptStatus').textContent=at?'当前已有附件：'+at.name:'当前没有附件';
   $('txFormTitle').textContent='修改记录';$('saveTxBtn').textContent='保存修改';$('cancelEditBtn').style.display='block';go('add');
 }
-async function deleteTx(id){if(!confirm('确定删除这笔记录吗？'))return;store.set('jlife_tx',store.get('jlife_tx').filter(x=>x.id!==id));await deleteAttachment(id);renderHome();renderTax();toast('已删除')}
+async function deleteTx(id){if(!confirm('确定删除这笔记录吗？'))return;store.set('jlife_tx',store.get('jlife_tx').filter(x=>x.id!==id));store.set('jlife_rem',store.get('jlife_rem').filter(x=>x.billTxId!==id));await deleteAttachment(id);renderHome();renderTax();toast('已删除')}
 async function viewReceipt(id){const a=await getAttachment(id);if(!a)return toast('这笔记录没有附件');const u=URL.createObjectURL(a.blob);window.open(u,'_blank');setTimeout(()=>URL.revokeObjectURL(u),60000)}
 
 function renderHome(){
@@ -183,9 +249,13 @@ function renderHome(){
   tx.filter(x=>x.date.startsWith(month)).forEach(x=>x.type==='income'?inc+=x.amount:exp+=x.amount);
   $('mIncome').textContent=fmt(inc);$('mExpense').textContent=fmt(exp);$('mNet').textContent=fmt(inc-exp);$('mNet').className='value '+(inc-exp>=0?'good':'bad');
   const td=tx.filter(x=>x.date===today).slice(0,12);
-  $('todayList').innerHTML=td.length?td.map(x=>`<div class="row"><div class="dot">${x.type==='income'?'💰':'💳'}</div><div class="grow"><div class="title">${esc(x.category)}${x.note?' · '+esc(x.note):''}</div><div class="sub">${esc(x.account)} ${x.deductible?'<span class="badge">可能可抵税</span>':''}</div><div class="inline-actions"><button class="mini" onclick="editTx(${x.id})">修改</button><button class="mini" onclick="viewReceipt(${x.id})">发票</button><button class="mini danger" onclick="deleteTx(${x.id})">删除</button></div></div><div class="amt ${x.type==='income'?'good':'bad'}">${x.type==='income'?'+':'-'}${fmt(x.amount)}</div></div>`).join(''):'<div class="empty">今天还没有记录</div>';
-  renderReminderPreview();
+  $('todayList').innerHTML=td.length?td.map(x=>`<div class="row"><div class="dot">${x.type==='income'?'💰':'💳'}</div><div class="grow"><div class="title">${esc(x.category)}${x.note?' · '+esc(x.note):''}</div><div class="sub">${esc(x.account)} ${x.project?' · 项目：'+esc(x.project):''} ${x.deductible?'<span class="badge">可能可抵税</span>':''}</div><div class="inline-actions"><button class="mini" onclick="editTx(${x.id})">修改</button><button class="mini" onclick="viewReceipt(${x.id})">发票</button><button class="mini danger" onclick="deleteTx(${x.id})">删除</button></div></div><div class="amt ${x.type==='income'?'good':'bad'}">${x.type==='income'?'+':'-'}${fmt(x.amount)}</div></div>`).join(''):'<div class="empty">今天还没有记录</div>';
+  renderPendingBills();renderReminderPreview();
 }
+
+function syncBillReminder(tx){let rem=store.get('jlife_rem').filter(x=>x.billTxId!==tx.id);if(tx.dueDate&&tx.paymentStatus==='pending'){const notify=new Date(tx.dueDate+'T09:00:00');notify.setDate(notify.getDate()-(tx.reminderDays||3));rem.push({id:-Math.abs(Number(tx.id)),billTxId:tx.id,title:`账单待付款：${tx.note||tx.project||tx.category} ${fmt(tx.amount)}`,when:new Date(notify.getTime()-notify.getTimezoneOffset()*60000).toISOString().slice(0,16),dueDate:tx.dueDate,done:false});rem.sort((a,b)=>a.when.localeCompare(b.when))}store.set('jlife_rem',rem)}
+function renderPendingBills(){const txRows=store.get('jlife_tx').filter(x=>x.paymentStatus==='pending'&&x.dueDate).map(x=>({...x,source:'tx'})),billRows=store.get('jlife_bills').filter(x=>x.status==='pending').map(x=>({...x,source:'bill'})),rows=[...txRows,...billRows].sort((a,b)=>a.dueDate.localeCompare(b.dueDate));$('pendingBills').innerHTML=rows.length?rows.slice(0,8).map(x=>`<div class="row"><div class="dot">🧾</div><div class="grow"><div class="title">${esc(x.source==='bill'?x.title:(x.note||x.project||x.category))} <span class="badge pending">Pending</span></div><div class="sub">${x.amount?fmt(x.amount)+' · ':''}${x.dueDate} · ${billDaysLabel(x.dueDate)}</div><div class="inline-actions"><button class="mini" onclick="${x.source==='bill'?`markStandaloneBillPaid(${x.id})`:`markBillPaid(${x.id})`}">标记已付款</button><button class="mini" onclick="${x.source==='bill'?`go('bills')`:`editTx(${x.id})`}">查看</button></div></div></div>`).join(''):'<div class="empty">没有待付款账单</div>'}
+function markBillPaid(id){const tx=store.get('jlife_tx'),x=tx.find(v=>v.id===id);if(!x)return;x.paymentStatus='paid';store.set('jlife_tx',tx);syncBillReminder(x);renderHome();renderReminders();toast('已标记为付款完成')}
 
 function saveLife(){
   const title=$('lifeTitle').value.trim(),body=$('lifeBody').value.trim();if(!title&&!body)return toast('写点内容吧');
@@ -212,37 +282,78 @@ function calendarRem(id){const x=store.get('jlife_rem').find(v=>v.id===id);if(!x
 
 let importRows=[],importFileName='';
 const builtinRules=[
-  {terms:['woolworths','coles'],category:'Groceries'},{terms:['uber'],category:'Transport'},
-  {terms:['bp ','bp australia','caltex','ampol'],category:'Fuel'},
-  {terms:['salary','payroll','wages','transfer in'],category:'Income',type:'income'}
+  {terms:['uber eats','doordash','menulog','deliveroo'],category:'Dining'},
+  {terms:['woolworths','woolies','coles supermarket','coles express','aldi','iga ','costco','harris farm','foodworks'],category:'Groceries'},
+  {terms:['bp australia','bp service','caltex','ampol','shell coles express','7-eleven fuel','united petroleum','metro petroleum','rapid fuels'],category:'Fuel'},
+  {terms:['uber trip','uber *trip','didi','13cabs','silver service','opal top up','transportfornsw','transport for nsw','nsw train','myki','translink','parking','linkt','etoll'],category:'Transport'},
+  {terms:['mcdonald','kfc','hungry jack','domino','pizza hut','subway','starbucks','restaurant','cafe ','coffee','bakery','sushi','grill','bistro','takeaway'],category:'Dining'},
+  {terms:['kmart','target','big w','amazon','ebay','temu','jb hi-fi','harvey norman','ikea'],category:'Shopping'},
+  {terms:['bunnings','mitre 10','the good guys','electricity','energy australia','origin energy','agl','water bill','council rates'],category:'Household'},
+  {terms:['telstra','optus','vodafone','tpg','aussie broadband','superloop'],category:'Phone & Internet'},
+  {terms:['qantas','virgin australia','jetstar','airbnb','booking.com','expedia','hotel'],category:'Travel'},
+  {terms:['officeworks'],category:'Office supplies'},
+  {terms:['xero','adobe','microsoft','google workspace','canva','zoom.us'],category:'Business'},
+  {terms:['accountant','accounting','solicitor','lawyer','legal fee'],category:'Accounting & Legal'},
+  {terms:['salary','payroll','wages','pay credit','interest paid','refund','transfer in'],category:'Income',type:'income'}
 ];
 function norm(s=''){return String(s).toLowerCase().replace(/[^a-z0-9]+/g,' ').trim()}
+function merchantProject(description=''){const raw=norm(description),known=[['Woolworths',['woolworths','woolies']],['Coles',['coles']],['ALDI',['aldi']],['Costco',['costco']],['Uber',['uber']],['Ampol',['ampol']],['Caltex',['caltex']],['BP',['bp australia','bp service']],['Amazon',['amazon']],['Officeworks',['officeworks']],['Bunnings',['bunnings']],['Qantas',['qantas']],['Jetstar',['jetstar']],['Virgin Australia',['virgin australia']],['Telstra',['telstra']],['Optus',['optus']]];const hit=known.find(x=>x[1].some(t=>raw.includes(t)));if(hit)return hit[0];let s=String(description).toUpperCase().replace(/\b(VISA|MASTERCARD|DEBIT|CREDIT|PURCHASE|EFTPOS|CARD|PAYMENT|PENDING|AUSTRALIA|AUS)\b/g,' ').replace(/\b\d{3,}\b/g,' ').replace(/[*#]/g,' ').replace(/\s+/g,' ').trim();return (s.split(/\s{2,}| - | NSW| VIC| QLD| WA| SA| TAS| ACT| NT/)[0]||s).slice(0,36)||'其他支出'}
+function isForeignCurrency(currency='',description=''){const c=String(currency).trim().toUpperCase();if(c&&c!=='AUD'&&c!=='AUSTRALIAN DOLLAR')return true;return /\b(USD|EUR|GBP|JPY|CNY|RMB|HKD|NZD|SGD|AED|CAD|THB|IDR|MYR|KRW)\b/i.test(description)}
+function inferTravelLocation(description='',currency=''){if(isForeignCurrency(currency,description))return'international';const s=' '+String(description).toUpperCase()+' ';if(/\b(MELBOURNE|BRISBANE|GOLD COAST|PERTH|ADELAIDE|HOBART|DARWIN|CANBERRA|NEWCASTLE|WOLLONGONG|GEELONG|CAIRNS|TOWNSVILLE|BALLARAT|BENDIGO|LAUNCESTON|ACT|VIC|QLD|WA|SA|TAS|NT)\b/.test(s))return'domestic-travel';return'sydney'}
+function projectFor(description,currency,type){return type==='expense'?(isForeignCurrency(currency,description)?'国际出差支出':merchantProject(description)):''}
 function txFingerprint(x){return [x.date,Number(x.amount).toFixed(2),x.type,norm(x.note||x.description)].join('|')}
 function csvLine(line){const out=[];let cur='',q=false;for(let i=0;i<line.length;i++){const c=line[i];if(c==='"'&&line[i+1]==='"'&&q){cur+='"';i++}else if(c==='"')q=!q;else if(c===','&&!q){out.push(cur.trim());cur=''}else cur+=c}out.push(cur.trim());return out}
 function cleanAmount(v){if(v==null)return NaN;let s=String(v).replace(/[\s,$]/g,'');let neg=s.startsWith('(')&&s.endsWith(')');s=s.replace(/[()]/g,'');const n=parseFloat(s);return neg?-n:n}
-function parseDate(v){const s=String(v||'').trim();if(/^\d{8}$/.test(s))return `${s.slice(0,4)}-${s.slice(4,6)}-${s.slice(6,8)}`;let m=s.match(/^(\d{1,2})[\/-](\d{1,2})[\/-](\d{2,4})/);if(m){let y=m[3].length===2?'20'+m[3]:m[3];return `${y}-${m[2].padStart(2,'0')}-${m[1].padStart(2,'0')}`}const d=new Date(s);return isNaN(d)?'':localDate(d)}
+function parseDate(v){const s=String(v||'').trim();if(/^\d{8}$/.test(s))return `${s.slice(0,4)}-${s.slice(4,6)}-${s.slice(6,8)}`;let iso=s.match(/^(\d{4})[\/.-](\d{1,2})[\/.-](\d{1,2})/);if(iso)return`${iso[1]}-${iso[2].padStart(2,'0')}-${iso[3].padStart(2,'0')}`;let m=s.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{2,4})/);if(m){let y=m[3].length===2?'20'+m[3]:m[3];return `${y}-${m[2].padStart(2,'0')}-${m[1].padStart(2,'0')}`}const d=new Date(s);return isNaN(d)?'':localDate(d)}
 function findCol(headers,names){return headers.findIndex(h=>names.some(n=>norm(h)===norm(n)||norm(h).includes(norm(n))))}
-function classify(description,type){const text=norm(description),custom=store.get('jlife_rules');const r=[...custom,...builtinRules].find(x=>(x.terms||[x.term]).some(t=>text.includes(norm(t)))&&(!x.type||x.type===type));return r?.category||(type==='income'?'Income':'Other')}
+function classify(description,type){const text=norm(description),custom=store.get('jlife_rules');const r=[...custom,...builtinRules].find(x=>(x.terms||[x.term]).filter(Boolean).some(t=>text.includes(norm(t)))&&(!x.type||x.type===type));return r?.category||(type==='income'?'Income':'Other')}
 function detectBank(headers){const h=norm(headers.join(' '));if(h.includes('bankwest')||h.includes('cba'))return'Commonwealth Bank';if(h.includes('westpac'))return'Westpac';if(h.includes('anz'))return'ANZ';if(h.includes('nab'))return'NAB';return'Australian bank CSV'}
-function parseCSV(text){const lines=text.replace(/^\uFEFF/,'').split(/\r?\n/).filter(x=>x.trim());if(!lines.length)throw new Error('CSV 文件没有交易资料');let headerAt=lines.findIndex((l,i)=>i<10&&/(date|日期)/i.test(l)&&/(amount|debit|credit|description|narrative|details)/i.test(l));let headers=headerAt>=0?csvLine(lines[headerAt]):[];let dateI=findCol(headers,['date','transaction date','processed date','value date','日期']),descI=findCol(headers,['description','narrative','details','transaction description','memo','particulars','transaction details']),amountI=findCol(headers,['amount','transaction amount']),debitI=findCol(headers,['debit','withdrawal','debit amount']),creditI=findCol(headers,['credit','deposit','credit amount']);let bank=detectBank(headers),dataLines=lines.slice(headerAt+1);if(headerAt<0){const sample=csvLine(lines[0]);if(!parseDate(sample[0])||!Number.isFinite(cleanAmount(sample[1])))throw new Error('无法识别日期、描述或金额列');dateI=0;amountI=1;descI=2;debitI=creditI=-1;dataLines=lines;bank='Commonwealth Bank / headerless CSV'}if(dateI<0||descI<0||(amountI<0&&debitI<0&&creditI<0))throw new Error('无法识别日期、描述或金额列');const rows=[];for(const line of dataLines){const c=csvLine(line);const date=parseDate(c[dateI]),description=(c[descI]||'').trim();let raw=amountI>=0?cleanAmount(c[amountI]):NaN,type='expense',amount=0;if(Number.isFinite(raw)){type=raw<0?'expense':'income';amount=Math.abs(raw)}else{const debit=cleanAmount(c[debitI]),credit=cleanAmount(c[creditI]);if(Number.isFinite(debit)&&debit!==0){type='expense';amount=Math.abs(debit)}else if(Number.isFinite(credit)&&credit!==0){type='income';amount=Math.abs(credit)}}if(date&&description&&amount)rows.push({date,description,type,amount})}if(!rows.length)throw new Error('没有找到可导入的交易');return {bank,rows}}
+function parseCSV(text){
+  const lines=text.replace(/^\uFEFF/,'').split(/\r?\n/).filter(x=>x.trim());if(!lines.length)throw new Error('CSV 文件没有交易资料');
+  let headerAt=lines.findIndex((l,i)=>i<10&&/(date|日期)/i.test(l)&&/(amount|debit|credit|description|narrative|details|withdrawal|deposit)/i.test(l));
+  let headers=headerAt>=0?csvLine(lines[headerAt]):[];
+  let dateI=findCol(headers,['date','transaction date','processed date','value date','日期']);
+  let descI=findCol(headers,['description','narrative','details','transaction description','memo','particulars','transaction details']);
+  let debitI=findCol(headers,['debit amount','debit','withdrawal','withdrawal amount','money out','paid out']);
+  let creditI=findCol(headers,['credit amount','credit','deposit','deposit amount','money in','paid in']);
+  let amountI=headers.findIndex(h=>['amount','transaction amount'].includes(norm(h)));
+  let directionI=findCol(headers,['transaction type','debit credit','dr cr','type','direction']);
+  let currencyI=findCol(headers,['currency','currency code','foreign currency','original currency','ccy']);
+  let bank=detectBank(headers),dataLines=lines.slice(headerAt+1);
+  if(headerAt<0){const sample=csvLine(lines[0]);if(!parseDate(sample[0])||!Number.isFinite(cleanAmount(sample[1])))throw new Error('无法识别日期、描述或金额列');dateI=0;amountI=1;descI=2;debitI=creditI=directionI=currencyI=-1;dataLines=lines;bank='Commonwealth Bank / headerless CSV'}
+  if(dateI<0||descI<0||(amountI<0&&debitI<0&&creditI<0))throw new Error('无法识别日期、描述或金额列');
+  const rows=[];
+  for(const line of dataLines){
+    const c=csvLine(line),date=parseDate(c[dateI]),description=(c[descI]||'').trim();let type='expense',amount=0;
+    const debit=debitI>=0?cleanAmount(c[debitI]):NaN,credit=creditI>=0?cleanAmount(c[creditI]):NaN,raw=amountI>=0?cleanAmount(c[amountI]):NaN;
+    if(Number.isFinite(debit)&&debit!==0){type='expense';amount=Math.abs(debit)}
+    else if(Number.isFinite(credit)&&credit!==0){type='income';amount=Math.abs(credit)}
+    else if(Number.isFinite(raw)&&raw!==0){const direction=norm(directionI>=0?c[directionI]:'');type=/(debit|withdrawal|expense|purchase|payment|money out|dr)/.test(direction)?'expense':/(credit|deposit|income|money in|cr)/.test(direction)?'income':raw<0?'expense':'income';amount=Math.abs(raw)}
+    const currency=currencyI>=0?(c[currencyI]||'').trim():'';if(date&&description&&amount)rows.push({date,description,type,amount,currency})
+  }
+  if(!rows.length)throw new Error('没有找到可导入的交易');return {bank,rows}
+}
 function ofxTag(block,tag){return (block.match(new RegExp('<'+tag+'>([^<\\r\\n]+)','i'))||[])[1]?.trim()||''}
 function parseOFX(text){const rows=(text.match(/<STMTTRN>[\s\S]*?<\/STMTTRN>/gi)||text.split(/<STMTTRN>/i).slice(1)).map(b=>{const raw=cleanAmount(ofxTag(b,'TRNAMT')),description=ofxTag(b,'NAME')||ofxTag(b,'MEMO')||'Bank transaction';return{date:parseDate(ofxTag(b,'DTPOSTED').slice(0,8)),description,type:raw<0?'expense':'income',amount:Math.abs(raw)}}).filter(x=>x.date&&x.amount);if(!rows.length)throw new Error('OFX / QFX 中没有可识别的交易');return{bank:'OFX / QFX',rows}}
-async function loadBankFile(ev){const file=ev.target.files[0];if(!file)return;try{const text=await file.text(),parsed=/\.(ofx|qfx)$/i.test(file.name)?parseOFX(text):parseCSV(text),existing=new Set(store.get('jlife_tx').map(txFingerprint));importFileName=file.name;importRows=parsed.rows.map((r,i)=>{const category=classify(r.description,r.type),duplicate=existing.has(txFingerprint({...r,note:r.description}));return{...r,index:i,category,taxStatus:'private',selected:!duplicate,duplicate}});$('importSummary').style.display='block';$('importSummary').innerHTML=`<b>${esc(parsed.bank)}</b> · ${importRows.length} 笔交易<br>${importRows.filter(x=>x.duplicate).length} 笔疑似重复，已自动取消选择。`;$('importTools').style.display='block';renderImportPreview();toast('文件已在本机读取')}catch(e){alert('导入失败：'+e.message)}finally{ev.target.value=''}}
+async function loadBankFile(ev){const file=ev.target.files[0];if(!file)return;try{const text=await file.text(),parsed=/\.(ofx|qfx)$/i.test(file.name)?parseOFX(text):parseCSV(text),existing=new Set(store.get('jlife_tx').map(txFingerprint));importFileName=file.name;importRows=parsed.rows.map((r,i)=>{const category=classify(r.description,r.type),duplicate=existing.has(txFingerprint({...r,note:r.description})),location=inferTravelLocation(r.description,r.currency);return{...r,index:i,category,location,project:projectFor(r.description,r.currency,r.type),taxStatus:r.type==='expense'&&location!=='sydney'?'possible':'private',selected:!duplicate,duplicate}});$('importSummary').style.display='block';$('importSummary').innerHTML=`<b>${esc(parsed.bank)}</b> · ${importRows.length} 笔交易<br>${importRows.filter(x=>x.duplicate).length} 笔疑似重复，已自动取消选择。`;$('importTools').style.display='block';renderImportPreview();toast('文件已在本机读取')}catch(e){alert('导入失败：'+e.message)}finally{ev.target.value=''}}
 function categoryOptions(value){return categories.map(c=>`<option ${c===value?'selected':''}>${esc(c)}</option>`).join('')}
 function taxOptions(value){return [['private','Private'],['possible','Possible deductible'],['deductible','Deductible']].map(([v,l])=>`<option value="${v}" ${v===value?'selected':''}>${l}</option>`).join('')}
-function renderImportPreview(){$('bulkCategory').innerHTML=categoryOptions('Other');$('importPreview').innerHTML=importRows.length?importRows.map((x,i)=>`<div class="row import-row ${x.duplicate?'duplicate':''}"><input class="import-check" type="checkbox" ${x.selected?'checked':''} onchange="setImportSelected(${i},this.checked)"><div class="grow"><div class="title">${esc(x.description)}</div><div class="sub">${x.date} · ${x.type==='income'?'收入':'支出'} ${fmt(x.amount)} ${x.duplicate?'<span class="badge">疑似重复</span>':''}</div><select onchange="changeImportCategory(${i},this.value)">${categoryOptions(x.category)}</select><select onchange="importRows[${i}].taxStatus=this.value">${taxOptions(x.taxStatus)}</select><div class="inline-actions"><button class="mini" onclick="saveRuleForRow(${i})">以后同类自动归类</button></div></div></div>`).join(''):'<div class="empty">没有可预览的交易</div>'}
+function renderImportPreview(){$('bulkCategory').innerHTML=categoryOptions('Other');$('importPreview').innerHTML=importRows.length?importRows.map((x,i)=>`<div class="row import-row ${x.duplicate?'duplicate':''}"><input class="import-check" type="checkbox" ${x.selected?'checked':''} onchange="setImportSelected(${i},this.checked)"><div class="grow"><div class="title">${esc(x.description)}</div><div class="sub">${x.date} · ${x.type==='income'?'收入':'支出'} ${fmt(x.amount)} ${x.currency&&x.currency.toUpperCase()!=='AUD'?'<span class="badge">'+esc(x.currency)+'</span>':''} ${x.location&&x.location!=='sydney'?'<span class="badge status-possible">非悉尼</span>':''} ${x.duplicate?'<span class="badge">疑似重复</span>':''}</div><label>项目</label><input value="${esc(x.project||'')}" onchange="importRows[${i}].project=this.value.trim()"><label>分类与税务用途</label><select onchange="changeImportCategory(${i},this.value)">${categoryOptions(x.category)}</select><select onchange="importRows[${i}].taxStatus=this.value">${taxOptions(x.taxStatus)}</select><div class="inline-actions"><button class="mini" onclick="saveRuleForRow(${i})">以后同类自动归类</button></div></div></div>`).join(''):'<div class="empty">没有可预览的交易</div>'}
 function setImportSelected(i,v){importRows[i].selected=v}
 function toggleAllImport(v){importRows.forEach(x=>x.selected=v&&!x.duplicate);renderImportPreview()}
 function changeImportCategory(i,v){importRows[i].category=v}
 function applyBulkCategory(){const v=$('bulkCategory').value;importRows.filter(x=>x.selected).forEach(x=>x.category=v);renderImportPreview()}
 function applyBulkTax(){const v=$('bulkTax').value;importRows.filter(x=>x.selected).forEach(x=>x.taxStatus=v);renderImportPreview()}
 function saveRuleForRow(i){const x=importRows[i],term=prompt('以后描述中包含什么文字时，自动归到 '+x.category+'？',x.description);if(!term)return;const rules=store.get('jlife_rules');rules.unshift({term:term.trim(),terms:[term.trim()],category:x.category,type:x.type});store.set('jlife_rules',rules);toast('本地分类规则已保存')}
-function confirmBankImport(){const chosen=importRows.filter(x=>x.selected);if(!chosen.length)return toast('请至少选择一笔交易');const batchId=Date.now(),tx=store.get('jlife_tx'),ids=[];chosen.forEach((x,i)=>{const id=batchId+i+1;ids.push(id);tx.unshift({id,type:x.type,amount:x.amount,category:x.category,account:'Bank Import',note:x.description,date:x.date,taxStatus:x.taxStatus,deductible:x.taxStatus!=='private',gst:0,importBatchId:batchId})});store.set('jlife_tx',tx);const h=store.get('jlife_import_history');h.unshift({id:batchId,fileName:importFileName,importedAt:new Date().toISOString(),count:chosen.length,total:chosen.reduce((s,x)=>s+x.amount,0),txIds:ids,undone:false});store.set('jlife_import_history',h);clearImportPreview();renderImportHistory();renderHome();toast(`已导入 ${chosen.length} 笔交易`)}
+function confirmBankImport(){const chosen=importRows.filter(x=>x.selected);if(!chosen.length)return toast('请至少选择一笔交易');const batchId=Date.now(),tx=store.get('jlife_tx'),ids=[];chosen.forEach((x,i)=>{const id=batchId+i+1;ids.push(id);tx.unshift({id,type:x.type,amount:x.amount,category:x.category,account:'Bank Import',project:x.project||'',location:x.location||'sydney',currency:x.currency||'AUD',note:x.description,date:x.date,taxStatus:x.taxStatus,deductible:x.taxStatus!=='private',gst:0,importBatchId:batchId})});store.set('jlife_tx',tx);const h=store.get('jlife_import_history');h.unshift({id:batchId,fileName:importFileName,importedAt:new Date().toISOString(),count:chosen.length,total:chosen.reduce((s,x)=>s+x.amount,0),txIds:ids,undone:false});store.set('jlife_import_history',h);clearImportPreview();renderImportHistory();renderHome();toast(`已导入 ${chosen.length} 笔交易`)}
 function clearImportPreview(){importRows=[];importFileName='';$('importSummary').style.display='none';$('importTools').style.display='none';$('importPreview').innerHTML=''}
 function renderImportHistory(){const h=store.get('jlife_import_history');$('importHistory').innerHTML=h.length?h.map((x,i)=>`<div class="row"><div class="dot">${x.undone?'↩':'⇩'}</div><div class="grow"><div class="title">${esc(x.fileName||'Bank file')}</div><div class="sub">${new Date(x.importedAt).toLocaleString('zh-CN')} · ${x.count} 笔</div>${i===0&&!x.undone?`<div class="inline-actions"><button class="mini danger" onclick="undoLatestImport(${x.id})">撤销最近一次导入</button></div>`:''}</div><div class="history-total">${x.undone?'已撤销':fmt(x.total)}</div></div>`).join(''):'<div class="empty">还没有导入记录</div>'}
+function reclassifyLatestImport(){const history=store.get('jlife_import_history'),latest=history.find(x=>!x.undone);if(!latest)return toast('还没有可重新分类的导入');const ids=new Set(latest.txIds||[]),tx=store.get('jlife_tx');let changed=0;tx.forEach(x=>{if(ids.has(x.id)){const next=classify(x.note||'',x.type);if(next!==x.category){x.category=next;changed++}}});store.set('jlife_tx',tx);renderHome();renderStats();renderTax();toast(changed?`已更新 ${changed} 笔分类`:'分类已经是最新')}
+function regroupLatestImport(){const history=store.get('jlife_import_history'),latest=history.find(x=>!x.undone);if(!latest)return toast('还没有可整理的导入');const ids=new Set(latest.txIds||[]),tx=store.get('jlife_tx');let changed=0;tx.forEach(x=>{if(ids.has(x.id)){const next=projectFor(x.note||'',x.currency||'',x.type);if(next!==x.project){x.project=next;changed++}}});store.set('jlife_tx',tx);renderHome();renderStats();renderTax();toast(changed?`已整理 ${changed} 笔项目`:'项目已经整理完成')}
+function retagLatestTravelImport(){const history=store.get('jlife_import_history'),latest=history.find(x=>!x.undone);if(!latest)return toast('还没有可识别的导入');const ids=new Set(latest.txIds||[]),tx=store.get('jlife_tx');let changed=0;tx.forEach(x=>{if(ids.has(x.id)&&x.type==='expense'){const location=inferTravelLocation(x.note||'',x.currency||'');x.location=location;if(location!=='sydney'&&(x.taxStatus||'private')==='private'){x.taxStatus='possible';x.deductible=true;changed++}}});store.set('jlife_tx',tx);renderHome();renderTax();toast(changed?`已标记 ${changed} 笔可能可抵税支出`:'没有发现新的非悉尼支出')}
 function undoLatestImport(id){const h=store.get('jlife_import_history'),latest=h.find(x=>!x.undone);if(!latest||latest.id!==id)return toast('只能撤销最近一次有效导入');if(!confirm(`撤销 ${latest.count} 笔导入交易？`))return;const ids=new Set(latest.txIds||[]);store.set('jlife_tx',store.get('jlife_tx').filter(x=>!ids.has(x.id)));latest.undone=true;store.set('jlife_import_history',h);renderImportHistory();renderHome();renderTax();toast('最近一次导入已撤销')}
 
-function renderStats(){const m=$('statsMonth').value||localDate().slice(0,7);$('statsMonth').value=m;const a=store.get('jlife_tx').filter(x=>x.date.startsWith(m));let inc=0,exp=0,c={};a.forEach(x=>{if(x.type==='income')inc+=x.amount;else{exp+=x.amount;c[x.category]=(c[x.category]||0)+x.amount}});$('sIncome').textContent=fmt(inc);$('sExpense').textContent=fmt(exp);const max=Math.max(1,...Object.values(c));const rows=Object.entries(c).sort((a,b)=>b[1]-a[1]);$('categoryStats').innerHTML=rows.length?rows.map(([k,v])=>`<div style="margin-top:14px"><div style="display:flex;justify-content:space-between"><span>${esc(k)}</span><b>${fmt(v)}</b></div><div class="statbar"><i style="width:${Math.round(v/max*100)}%"></i></div></div>`).join(''):'<div class="empty">这个月还没有支出</div>'}
+function renderStats(){const m=$('statsMonth').value||localDate().slice(0,7);$('statsMonth').value=m;const a=store.get('jlife_tx').filter(x=>x.date.startsWith(m));let inc=0,exp=0,c={},p={};a.forEach(x=>{if(x.type==='income')inc+=x.amount;else{exp+=x.amount;c[x.category]=(c[x.category]||0)+x.amount;const project=x.project||'未分项目';p[project]=(p[project]||0)+x.amount}});$('sIncome').textContent=fmt(inc);$('sExpense').textContent=fmt(exp);const bars=(target,data,empty)=>{const max=Math.max(1,...Object.values(data)),rows=Object.entries(data).sort((a,b)=>b[1]-a[1]);$(target).innerHTML=rows.length?rows.map(([k,v])=>`<div style="margin-top:14px"><div style="display:flex;justify-content:space-between;gap:12px"><span>${esc(k)}</span><b>${fmt(v)}</b></div><div class="statbar"><i style="width:${Math.round(v/max*100)}%"></i></div></div>`).join(''):`<div class="empty">${empty}</div>`};bars('categoryStats',c,'这个月还没有支出');bars('projectStats',p,'这个月还没有项目支出')}
 
 function fyBounds(label){const y=parseInt(label.slice(0,4));return {start:`${y}-07-01`,end:`${y+1}-06-30`}}
 function initFY(){const now=new Date(),y=now.getMonth()>=6?now.getFullYear():now.getFullYear()-1;const opts=[];for(let i=0;i<6;i++){const s=y-i;opts.push(`${s}-${String(s+1).slice(-2)}`)}$('fySelect').innerHTML=opts.map(x=>`<option>${x}</option>`).join('')}
@@ -250,10 +361,10 @@ async function renderTax(){
   const label=$('fySelect').value,{start,end}=fyBounds(label),a=store.get('jlife_tx').filter(x=>x.date>=start&&x.date<=end);let inc=0,exp=0,ded=0,gst=0,missing=0;const rows=[];
   for(const x of a){if(x.type==='income')inc+=x.amount;else exp+=x.amount;const status=x.taxStatus||(x.deductible?'possible':'private');if(status!=='private'){ded+=x.amount;gst+=Number(x.gst||0);const at=await getAttachment(x.id);if(!at)missing++;rows.push({...x,taxStatus:status,hasAttachment:!!at})}}
   $('fyIncome').textContent=fmt(inc);$('fyExpense').textContent=fmt(exp);$('fyDeductible').textContent=fmt(ded);$('fyGST').textContent=fmt(gst);$('missingReceipts').textContent=`${missing} 笔`;
-  $('taxList').innerHTML=rows.length?rows.sort((a,b)=>b.date.localeCompare(a.date)).map(x=>`<div class="row"><div class="dot">🧾</div><div class="grow"><div class="title">${esc(x.category)} · ${fmt(x.amount)}</div><div class="sub">${x.date}${x.note?' · '+esc(x.note):''} · <span class="badge status-${x.taxStatus}">${x.taxStatus==='deductible'?'可抵税':'可能可抵税'}</span> · GST ${fmt(x.gst||0)} · ${x.hasAttachment?'有发票':'缺发票'}</div><div class="inline-actions"><button class="mini" onclick="editTx(${x.id})">修改</button><button class="mini" onclick="viewReceipt(${x.id})">查看发票</button></div></div></div>`).join(''):'<div class="empty">这个财政年度还没有标记为可抵税的记录</div>';
+  $('taxList').innerHTML=rows.length?rows.sort((a,b)=>b.date.localeCompare(a.date)).map(x=>`<div class="row"><div class="dot">🧾</div><div class="grow"><div class="title">${esc(x.category)} · ${fmt(x.amount)}</div><div class="sub">${x.date}${x.project?' · 项目：'+esc(x.project):''}${x.note?' · '+esc(x.note):''} · <span class="badge status-${x.taxStatus}">${x.taxStatus==='deductible'?'可抵税':'可能可抵税'}</span> · GST ${fmt(x.gst||0)} · ${x.hasAttachment?'有发票':'缺发票'}</div><div class="inline-actions"><button class="mini" onclick="editTx(${x.id})">修改</button><button class="mini" onclick="viewReceipt(${x.id})">查看发票</button></div></div></div>`).join(''):'<div class="empty">这个财政年度还没有标记为可抵税的记录</div>';
 }
 
-function exportCSV(){const a=store.get('jlife_tx');let s='date,type,category,account,amount,gst,deductible,note\n'+a.map(x=>[x.date,x.type,x.category,x.account,x.amount,x.gst||0,x.deductible?'yes':'no',`"${(x.note||'').replace(/"/g,'""')}"`].join(',')).join('\n');downloadBlob('\ufeff'+s,'text/csv;charset=utf-8','JLife-transactions.csv')}
+function exportCSV(){const a=store.get('jlife_tx');let s='date,type,category,project,account,currency,amount,gst,deductible,note\n'+a.map(x=>[x.date,x.type,x.category,`"${(x.project||'').replace(/"/g,'""')}"`,x.account,x.currency||'AUD',x.amount,x.gst||0,x.deductible?'yes':'no',`"${(x.note||'').replace(/"/g,'""')}"`].join(',')).join('\n');downloadBlob('\ufeff'+s,'text/csv;charset=utf-8','JLife-transactions.csv')}
 function exportTaxCSV(){const label=$('fySelect').value,{start,end}=fyBounds(label),a=store.get('jlife_tx').filter(x=>x.date>=start&&x.date<=end&&x.deductible);let s='date,category,account,amount,gst,note\n'+a.map(x=>[x.date,x.category,x.account,x.amount,x.gst||0,`"${(x.note||'').replace(/"/g,'""')}"`].join(',')).join('\n');downloadBlob('\ufeff'+s,'text/csv;charset=utf-8',`JLife-Tax-${label}.csv`)}
 
 function blobToDataURL(blob){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(blob)})}
@@ -262,22 +373,22 @@ async function exportJSON(){
   toast('正在制作完整备份…');
   const ats=await allAttachments(),attachments=[];
   for(const a of ats)attachments.push({txId:a.txId,name:a.name,type:a.type,data:await blobToDataURL(a.blob)});
-  const data={version:3,transactions:store.get('jlife_tx'),life:store.get('jlife_life'),reminders:store.get('jlife_rem'),rules:store.get('jlife_rules'),importHistory:store.get('jlife_import_history'),attachments,exportedAt:new Date().toISOString()};
+  const data={version:4,transactions:store.get('jlife_tx'),life:store.get('jlife_life'),reminders:store.get('jlife_rem'),bills:store.get('jlife_bills'),rules:store.get('jlife_rules'),importHistory:store.get('jlife_import_history'),attachments,exportedAt:new Date().toISOString()};
   downloadBlob(JSON.stringify(data),'application/json','JLife-full-backup.json');toast('完整备份已导出');
 }
 async function restoreJSON(ev){
   const file=ev.target.files[0];if(!file)return;if(!confirm('恢复会覆盖当前 J Life 数据，确定继续吗？')){ev.target.value='';return}
   try{
     const data=JSON.parse(await file.text());if(!Array.isArray(data.transactions)||!Array.isArray(data.life)||!Array.isArray(data.reminders))throw new Error('格式不正确');
-    store.set('jlife_tx',data.transactions);store.set('jlife_life',data.life);store.set('jlife_rem',data.reminders);store.set('jlife_rules',data.rules||[]);store.set('jlife_import_history',data.importHistory||[]);await clearAttachments();
+    store.set('jlife_tx',data.transactions);store.set('jlife_life',data.life);store.set('jlife_rem',data.reminders);store.set('jlife_bills',data.bills||[]);store.set('jlife_rules',data.rules||[]);store.set('jlife_import_history',data.importHistory||[]);await clearAttachments();
     for(const a of (data.attachments||[])){const b=dataURLToBlob(a.data);await putAttachment(a.txId,new File([b],a.name||'attachment',{type:a.type||b.type}))}
-    toast('恢复完成');renderHome();renderTax();
+    toast('恢复完成');renderHome();renderTax();renderBills();
   }catch(e){alert('恢复失败：'+e.message)}finally{ev.target.value=''}
 }
 function downloadBlob(content,type,name){const b=new Blob([content],{type}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
-async function clearAll(){if(confirm('确定清空 J Life 的全部数据和发票吗？此操作不能撤销。')){['jlife_tx','jlife_life','jlife_rem','jlife_rules','jlife_import_history'].forEach(k=>localStorage.removeItem(k));await clearAttachments();renderHome();renderTax();renderImportHistory();toast('已清空')}}
+async function clearAll(){if(confirm('确定清空 J Life 的全部数据和发票吗？此操作不能撤销。')){['jlife_tx','jlife_life','jlife_rem','jlife_bills','jlife_rules','jlife_import_history'].forEach(k=>localStorage.removeItem(k));await clearAttachments();renderHome();renderTax();renderBills();renderImportHistory();toast('已清空')}}
 
-$('txDate').value=localDate();$('lifeDate').value=localDate();$('statsMonth').value=localDate().slice(0,7);$('todayText').textContent=new Date().toLocaleDateString('zh-CN',{weekday:'long',month:'long',day:'numeric'});cancelRemEdit();initFY();renderHome();renderImportHistory();
+$('txDate').value=localDate();$('lifeDate').value=localDate();$('statsMonth').value=localDate().slice(0,7);$('todayText').textContent=new Date().toLocaleDateString('zh-CN',{weekday:'long',month:'long',day:'numeric'});cancelRemEdit();initFY();renderHome();renderImportHistory();initCloud();
 </script>
 </body>
 </html>
