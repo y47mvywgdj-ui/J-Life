@@ -1,12 +1,11 @@
 <!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#0f172a" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="J Life" />
+<html lang="zh-CN"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="J Life">
   <title>J Life</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
@@ -28,33 +27,33 @@
 <body>
 <div class="app">
   <section id="home" class="page active">
-    <div class="top"><div class="brand"><h1>J Life</h1><p id="todayText"></p></div><button class="pill" onclick="newTx()">＋ 记录</button></div>
-    <div class="grid2"><div class="card metric"><div class="label">本月收入</div><div id="mIncome" class="value good">$0</div></div><div class="card metric"><div class="label">本月支出</div><div id="mExpense" class="value bad">$0</div></div></div>
-    <div class="card metric"><div class="label">本月净结余</div><div id="mNet" class="value">$0</div></div>
+    <div class="top"><div class="brand"><h1>J Life</h1><p id="todayText">9月4日星期五</p></div><button class="pill" onclick="newTx()">＋ 记录</button></div>
+    <div class="grid2"><div class="card metric"><div class="label">本月收入</div><div id="mIncome" class="value good">$0.00</div></div><div class="card metric"><div class="label">本月支出</div><div id="mExpense" class="value bad">$0.00</div></div></div>
+    <div class="card metric"><div class="label">本月净结余</div><div id="mNet" class="value good">$0.00</div></div>
     <div class="section-title"><h2>快速记录</h2></div>
     <div class="quick"><button class="q" onclick="presetTx('expense','餐饮')"><span>🍜</span>吃饭</button><button class="q" onclick="presetTx('expense','购物')"><span>🛍️</span>购物</button><button class="q" onclick="presetTx('income','收入')"><span>💰</span>收入</button><button class="q" onclick="go('life')"><span>📖</span>生活</button></div>
-    <div class="section-title"><h2>今天的记录</h2><button class="linkbtn" onclick="go('stats')">查看统计</button></div><div class="card" id="todayList"></div>
-    <div class="section-title"><h2>待付款</h2></div><div class="card" id="pendingBills"></div>
-    <div class="section-title"><h2>近期提醒</h2></div><div class="card" id="reminderPreview"></div>
+    <div class="section-title"><h2>今天的记录</h2><button class="linkbtn" onclick="go('stats')">查看统计</button></div><div class="card" id="todayList"><div class="empty">今天还没有记录</div></div>
+    <div class="section-title"><h2>待付款</h2></div><div class="card" id="pendingBills"><div class="empty">没有待付款账单</div></div>
+    <div class="section-title"><h2>近期提醒</h2></div><div class="card" id="reminderPreview"><div class="empty">没有即将到来的提醒</div></div>
   </section>
 
   <section id="add" class="page">
     <div class="top"><div class="brand"><h1 id="txFormTitle">记一笔</h1><p>收入、支出、发票与税务资料</p></div></div>
     <div class="form-card">
       <div class="seg"><button id="expenseBtn" class="on" onclick="setTxType('expense')">支出</button><button id="incomeBtn" onclick="setTxType('income')">收入</button></div>
-      <label>金额（AUD）</label><input id="txAmount" inputmode="decimal" placeholder="0.00" />
+      <label>金额（AUD）</label><input id="txAmount" inputmode="decimal" placeholder="0.00">
       <label>分类</label><select id="txCategory"><option>餐饮</option><option>购物</option><option>家庭</option><option>汽车</option><option>旅行</option><option>公司</option><option>宝宝</option><option>办公用品</option><option>电话网络</option><option>会计法律</option><option>收入</option><option>其他</option></select>
       <label>账户</label><select id="txAccount"><option>个人</option><option>家庭</option><option>公司</option><option>现金</option></select>
-      <label>项目</label><input id="txProject" placeholder="例如：Woolworths / 国际出差支出" />
+      <label>项目</label><input id="txProject" placeholder="例如：Woolworths / 国际出差支出">
       <label>消费地点</label><select id="txLocation"><option value="sydney">悉尼本地</option><option value="domestic-travel">澳洲境内出差（非悉尼）</option><option value="international">海外出差</option></select>
-      <label>备注</label><input id="txNote" placeholder="例如：Costco 购物 / 公司油费" />
-      <label>日期</label><input id="txDate" type="date" />
+      <label>备注</label><input id="txNote" placeholder="例如：Costco 购物 / 公司油费">
+      <label>日期</label><input id="txDate" type="date">
       <label>税务用途</label><select id="txTaxStatus"><option value="private">私人 / Private</option><option value="possible">可能可抵税 / Possible deductible</option><option value="deductible">可抵税 / Deductible</option></select>
-      <label>GST 金额（可选）</label><input id="txGST" inputmode="decimal" placeholder="0.00" />
-      <label>发票 / 账单 / 收据（图片或 PDF）</label><input id="txReceipt" type="file" accept="image/*,application/pdf,text/plain" onchange="detectBillDueDate(event)" />
+      <label>GST 金额（可选）</label><input id="txGST" inputmode="decimal" placeholder="0.00">
+      <label>发票 / 账单 / 收据（图片或 PDF）</label><input id="txReceipt" type="file" accept="image/*,application/pdf,text/plain" onchange="detectBillDueDate(event)">
       <div id="receiptStatus" class="small"></div>
-      <label>付款到期日（识别后请确认）</label><input id="txDueDate" type="date" />
-      <label>提前提醒</label><select id="txReminderDays"><option value="1">提前 1 天</option><option value="3" selected>提前 3 天</option><option value="7">提前 7 天</option><option value="14">提前 14 天</option></select>
+      <label>付款到期日（识别后请确认）</label><input id="txDueDate" type="date">
+      <label>提前提醒</label><select id="txReminderDays"><option value="1">提前 1 天</option><option value="3" selected="">提前 3 天</option><option value="7">提前 7 天</option><option value="14">提前 14 天</option></select>
       <button class="primary" id="saveTxBtn" onclick="saveTx()">保存记录</button>
       <button class="secondary" id="cancelEditBtn" style="display:none" onclick="cancelTxEdit()">取消修改</button>
     </div>
@@ -63,13 +62,13 @@
 
   <section id="life" class="page">
     <div class="top"><div class="brand"><h1>生活</h1><p>记录值得记住的事</p></div></div>
-    <div class="form-card"><label>标题</label><input id="lifeTitle" placeholder="今天发生了什么？" /><label>内容</label><textarea id="lifeBody" placeholder="写几句就好……"></textarea><label>日期</label><input id="lifeDate" type="date" /><button class="primary" id="saveLifeBtn" onclick="saveLife()">保存生活记录</button><button class="secondary" id="cancelLifeBtn" style="display:none" onclick="cancelLifeEdit()">取消修改</button></div>
+    <div class="form-card"><label>标题</label><input id="lifeTitle" placeholder="今天发生了什么？"><label>内容</label><textarea id="lifeBody" placeholder="写几句就好……"></textarea><label>日期</label><input id="lifeDate" type="date"><button class="primary" id="saveLifeBtn" onclick="saveLife()">保存生活记录</button><button class="secondary" id="cancelLifeBtn" style="display:none" onclick="cancelLifeEdit()">取消修改</button></div>
     <div class="section-title"><h2>最近记录</h2></div><div class="card" id="lifeList"></div>
   </section>
 
   <section id="reminders" class="page">
     <div class="top"><div class="brand"><h1>提醒</h1><p>重要事情别忘了</p></div></div>
-    <div class="form-card"><label>提醒内容</label><input id="remTitle" placeholder="例如：交 rego" /><label>日期和时间</label><input id="remWhen" type="datetime-local" /><button class="primary" id="saveRemBtn" onclick="saveReminder()">保存提醒</button><button class="secondary" id="cancelRemBtn" style="display:none" onclick="cancelRemEdit()">取消修改</button></div>
+    <div class="form-card"><label>提醒内容</label><input id="remTitle" placeholder="例如：交 rego"><label>日期和时间</label><input id="remWhen" type="datetime-local"><button class="primary" id="saveRemBtn" onclick="saveReminder()">保存提醒</button><button class="secondary" id="cancelRemBtn" style="display:none" onclick="cancelRemEdit()">取消修改</button></div>
     <div class="card small" style="margin-top:12px">网页版不能保证完全关闭后自动弹出系统通知。重要提醒建议同时点“加入日历”。</div>
     <div class="section-title"><h2>全部提醒</h2></div><div class="card" id="reminderList"></div>
   </section>
@@ -93,7 +92,7 @@
       <label>账单名称</label><input id="billTitle" placeholder="例如：电费账单">
       <label>金额（AUD，可选）</label><input id="billAmount" inputmode="decimal" placeholder="0.00">
       <label>付款到期日</label><input id="billDueDate" type="date">
-      <label>提前提醒</label><select id="billReminderDays"><option value="1">提前 1 天</option><option value="3" selected>提前 3 天</option><option value="7">提前 7 天</option><option value="14">提前 14 天</option></select>
+      <label>提前提醒</label><select id="billReminderDays"><option value="1">提前 1 天</option><option value="3" selected="">提前 3 天</option><option value="7">提前 7 天</option><option value="14">提前 14 天</option></select>
       <button class="primary" onclick="saveBill()">保存为 Pending</button><button class="secondary" onclick="cancelBillDraft()">取消</button>
     </div>
     <div class="section-title"><h2>Pending</h2></div><div class="card" id="billList"></div>
@@ -105,16 +104,16 @@
     <div id="importSummary" class="card small" style="display:none"></div>
     <div id="importTools" style="display:none">
       <div class="card"><div class="title">批量处理已选交易</div><label>分类</label><select id="bulkCategory"></select><button class="secondary" onclick="applyBulkCategory()">应用分类</button><label>税务用途</label><select id="bulkTax"><option value="private">私人 / Private</option><option value="possible">可能可抵税 / Possible deductible</option><option value="deductible">可抵税 / Deductible</option></select><button class="secondary" onclick="applyBulkTax()">应用税务用途</button></div>
-      <div class="card"><div class="preview-head"><input id="selectAllImport" type="checkbox" checked onchange="toggleAllImport(this.checked)"><div><div class="title">导入预览</div><div class="small">重复交易默认不选择，可逐笔修改分类与税务用途。</div></div></div><div id="importPreview"></div></div>
+      <div class="card"><div class="preview-head"><input id="selectAllImport" type="checkbox" checked="" onchange="toggleAllImport(this.checked)"><div><div class="title">导入预览</div><div class="small">重复交易默认不选择，可逐笔修改分类与税务用途。</div></div></div><div id="importPreview"></div></div>
       <button class="primary" onclick="confirmBankImport()">确认导入已选交易</button>
       <button class="secondary" onclick="clearImportPreview()">取消本次导入</button>
     </div>
-    <div class="section-title"><h2>导入历史</h2></div><div class="card"><button class="secondary" style="margin-top:0" onclick="reclassifyLatestImport()">重新自动分类最近一次导入</button><button class="secondary" onclick="regroupLatestImport()">重新整理最近一次导入的项目</button><button class="secondary" onclick="retagLatestTravelImport()">重新识别非悉尼税务标签</button><p class="small">同一商户会归入同名项目；外币交易归入“国际出差支出”。非悉尼支出会标为“可能可抵税”，请按实际工作用途确认。</p></div><div class="card" id="importHistory"></div>
+    <div class="section-title"><h2>导入历史</h2></div><div class="card"><button class="secondary" style="margin-top:0" onclick="reclassifyLatestImport()">重新自动分类最近一次导入</button><button class="secondary" onclick="regroupLatestImport()">重新整理最近一次导入的项目</button><button class="secondary" onclick="retagLatestTravelImport()">重新识别非悉尼税务标签</button><p class="small">同一商户会归入同名项目；外币交易归入“国际出差支出”。非悉尼支出会标为“可能可抵税”，请按实际工作用途确认。</p></div><div class="card" id="importHistory"><div class="empty">还没有导入记录</div></div>
   </section>
 
   <section id="tax" class="page">
     <div class="top"><div class="brand"><h1>Tax Centre</h1><p>按澳洲财政年度整理资料</p></div></div>
-    <div class="card monthpick"><select id="fySelect" onchange="renderTax()"></select></div>
+    <div class="card monthpick"><select id="fySelect" onchange="renderTax()"><option>2026-27</option><option>2025-26</option><option>2024-25</option><option>2023-24</option><option>2022-23</option><option>2021-22</option></select></div>
     <div class="grid4">
       <div class="card metric"><div class="label">财政年度收入</div><div id="fyIncome" class="value good">$0</div></div>
       <div class="card metric"><div class="label">财政年度支出</div><div id="fyExpense" class="value bad">$0</div></div>
@@ -390,5 +389,6 @@ async function clearAll(){if(confirm('确定清空 J Life 的全部数据和发�
 
 $('txDate').value=localDate();$('lifeDate').value=localDate();$('statsMonth').value=localDate().slice(0,7);$('todayText').textContent=new Date().toLocaleDateString('zh-CN',{weekday:'long',month:'long',day:'numeric'});cancelRemEdit();initFY();renderHome();renderImportHistory();initCloud();
 </script>
-</body>
-</html>
+
+
+</body></html>
